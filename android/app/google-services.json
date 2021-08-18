@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "90194541326",
+    "project_id": "gtu-question-paper",
+    "storage_bucket": "gtu-question-paper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90194541326:android:02921814a8b308d64f755f",
+        "android_client_info": {
+          "package_name": "com.hirenvadher.gtuexampapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90194541326-7veosva0t49e6m28sj08g1m4pe18c0ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6cY4wS0IKP32PN57xUpXHRQt9VdrWSxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90194541326-7veosva0t49e6m28sj08g1m4pe18c0ao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
