@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:subject_repository/src/entities/entities.dart';
+import 'package:branch_repository/src/entities/entities.dart';
 
 @immutable
 class Branch {
