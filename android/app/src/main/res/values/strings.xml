@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GTU Questions Paper</string>
+    <string name="facebook_app_id">861773761403789</string>
+    <string name="fb_login_protocol_scheme">fb861773761403789</string>
+</resources>

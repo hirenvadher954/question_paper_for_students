@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "90194541326-evvi9pg3jc7l7kt3p14galgoqfffcpu3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hirenvadher.gtuexampapers",
+            "certificate_hash": "56b6f4320dcea451f20660c183e6e73f7f2ffbb4"
+          }
+        },
+        {
           "client_id": "90194541326-7veosva0t49e6m28sj08g1m4pe18c0ao.apps.googleusercontent.com",
           "client_type": 3
         }

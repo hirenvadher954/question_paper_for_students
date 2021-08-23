@@ -14,7 +14,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.0"
+    version: "7.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -22,13 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  branch_repository:
-    dependency: "direct main"
-    description:
-      path: branch_repository
-      relative: true
-    source: path
-    version: "1.0.0+1"
   change_app_package_name:
     dependency: "direct dev"
     description:
@@ -57,27 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  cloud_firestore:
-    dependency: transitive
-    description:
-      name: cloud_firestore
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.5.0"
-  cloud_firestore_platform_interface:
-    dependency: transitive
-    description:
-      name: cloud_firestore_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.4.0"
-  cloud_firestore_web:
-    dependency: transitive
-    description:
-      name: cloud_firestore_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.4.0"
   collection:
     dependency: transitive
     description:
@@ -173,7 +145,14 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.0"
+    version: "7.2.0"
+  flutter_login_facebook:
+    dependency: "direct main"
+    description:
+      name: flutter_login_facebook
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -191,6 +170,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  google_sign_in:
+    dependency: "direct main"
+    description:
+      name: google_sign_in
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.7"
+  google_sign_in_platform_interface:
+    dependency: transitive
+    description:
+      name: google_sign_in_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
+  google_sign_in_web:
+    dependency: transitive
+    description:
+      name: google_sign_in_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0+2"
   http:
     dependency: transitive
     description:
@@ -219,6 +219,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  list_ext:
+    dependency: transitive
+    description:
+      name: list_ext
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   matcher:
     dependency: transitive
     description:
@@ -316,14 +323,14 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
-  rxdart:
+    version: "6.0.0"
+  quiver:
     dependency: transitive
     description:
-      name: rxdart
+      name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.1"
+    version: "3.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
