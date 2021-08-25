@@ -5,6 +5,8 @@ import 'package:gtu_question_paper/app/sign_in/sign_in_button.dart';
 import 'package:gtu_question_paper/app/sign_in/sign_in_manager.dart';
 import 'package:gtu_question_paper/app/sign_in/social_sign_in_button.dart';
 import 'package:gtu_question_paper/common_widgets/show_exception_alert_dialog.dart';
+import 'package:gtu_question_paper/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({required this.manager, required this.isLoading});
@@ -12,8 +14,23 @@ class SignInPage extends StatelessWidget {
   final SignInManager manager;
   final bool isLoading;
 
+  static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    return ChangeNotifierProvider<ValueNotifier<bool>>(
+      create: (_) => ValueNotifier<bool>(false),
+      child: Consumer<ValueNotifier<bool>>(
+        builder: (_, isLoading, __) => Provider<SignInManager>(
+          create: (_) => SignInManager(auth: auth, isLoading: isLoading),
+          child: Consumer<SignInManager>(
+            builder: (_, manager, __) =>
+                SignInPage(manager: manager, isLoading: isLoading.value),
+          ),
+        ),
+      ),
+    );
+  }
 
-  void _showSignInError(BuildContext context, Exception exception) {
+    void _showSignInError(BuildContext context, Exception exception) {
     if (exception is FirebaseException &&
         exception.code == 'ERROR_ABORTED_BY_USER') {
       return;
