@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/app/home/account/account_page.dart';
+import 'package:gtu_question_paper/app/home/find_paper/PaperSearch.dart';
 import 'package:gtu_question_paper/app/home/material_home_scaffold.dart';
 import 'package:gtu_question_paper/app/home/news/news_page.dart';
-import 'package:gtu_question_paper/app/home/paper_search/PaperSearch.dart';
 import 'package:gtu_question_paper/app/home/tab_item.dart';
 
 class HomePage extends StatefulWidget {
