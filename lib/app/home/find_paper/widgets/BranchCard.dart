@@ -1,29 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gtu_question_paper/constants.dart';
 
 class BranchCard extends StatelessWidget {
-  BranchCard({required this.branchName});
+  BranchCard({required this.branchName, required this.imgSrc});
 
   final String branchName;
+  final String imgSrc;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.amberAccent, borderRadius: BorderRadius.circular(13)),
+          color: Colors.lightBlueAccent,
+          borderRadius: BorderRadius.circular(13),
+          gradient: LinearGradient(
+              colors: [kCardGradientFirst, kCardGradientSecond])),
       child: Column(
         children: [
           Spacer(),
-          FlutterLogo(
-            size: 70,
+          SvgPicture.network(
+            imgSrc,
+            placeholderBuilder: (context) => CircularProgressIndicator(),
+            height: 80,
           ),
           Spacer(),
           Padding(
-            padding:  EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Text(
               branchName,
               textAlign: TextAlign.center,
-              style:
-                  Theme.of(context).textTheme.headline6!.copyWith(fontSize: 15),
+              style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: Colors.yellow,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],
