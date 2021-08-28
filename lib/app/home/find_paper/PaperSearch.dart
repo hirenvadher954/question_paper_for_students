@@ -79,7 +79,7 @@ class PaperSearchPage extends StatelessWidget {
               //   ],
               // )
               SliverAppBar(
-                  floating: true,
+                  floating: false,
                   pinned: false,
                   expandedHeight: size.height * 0.4,
                   bottom: PreferredSize(
@@ -88,14 +88,8 @@ class PaperSearchPage extends StatelessWidget {
                   ),
                   flexibleSpace: Stack(
                     children: [
-                      Positioned(
-                        child: GradientContainer(
-                          screenSize: 0.4,
-                        ),
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
+                      GradientContainer(
+                        screenSize: 0.4,
                       ),
                       Padding(
                           padding: const EdgeInsets.all(20.0),
@@ -113,6 +107,11 @@ class PaperSearchPage extends StatelessWidget {
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(50),
                             ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.green,
+                              )
+                            ],
                           ),
                         ),
                         bottom: -1,
