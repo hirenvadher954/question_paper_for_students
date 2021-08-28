@@ -20,7 +20,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'GTU Question Paper',
         theme: theme,
-        home: LandingPage(
+        home:
+            // DetailFindPaper(
+            //   branchDetail: FindPaper(
+            //       imgSrc:
+            //           "https://firebasestorage.googleapis.com/v0/b/gtu-question-paper.appspot.com/o/Branch%20Images%2FIT.svg?alt=media&token=1deaaa58-96d7-4535-a389-0aab5b5c8557",
+            //       branchName: "Conputer Enginerring"),
+            // )
+            LandingPage(
           databaseBuilder: (uid) => FirestoreDataBase(uid: uid),
         ),
       ),

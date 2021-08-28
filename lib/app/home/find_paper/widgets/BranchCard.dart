@@ -20,10 +20,13 @@ class BranchCard extends StatelessWidget {
       child: Column(
         children: [
           Spacer(),
-          SvgPicture.network(
-            imgSrc,
-            placeholderBuilder: (context) => CircularProgressIndicator(),
-            height: 80,
+          Hero(
+            tag: branchName,
+            child: SvgPicture.network(
+              imgSrc,
+              placeholderBuilder: (context) => CircularProgressIndicator(),
+              height: 80,
+            ),
           ),
           Spacer(),
           Padding(
@@ -31,7 +34,7 @@ class BranchCard extends StatelessWidget {
             child: Text(
               branchName,
               textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.oswald(
                   fontSize: 18,
                   color: Colors.yellow,
                   fontWeight: FontWeight.bold),
