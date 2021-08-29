@@ -13,10 +13,11 @@ class BranchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.lightBlueAccent,
-          borderRadius: BorderRadius.circular(13),
-          gradient: LinearGradient(
-              colors: [kCardGradientFirst, kCardGradientSecond])),
+        color: Colors.lightBlueAccent,
+        borderRadius: BorderRadius.circular(13),
+        gradient:
+            LinearGradient(colors: [kCardGradientFirst, kCardGradientSecond]),
+      ),
       child: Column(
         children: [
           Spacer(),

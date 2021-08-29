@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
+  const SearchBar({this.margin = 30});
+  final double margin;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 60),
+      margin: EdgeInsets.symmetric(vertical: margin),
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.white,
