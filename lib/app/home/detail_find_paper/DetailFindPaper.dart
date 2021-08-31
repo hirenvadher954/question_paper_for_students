@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
+import 'package:gtu_question_paper/app/home/subject_selection_screen/subject_selection_screen.dart';
 import 'package:gtu_question_paper/constants.dart';
 import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 
@@ -15,7 +17,6 @@ class DetailFindPaper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print(branchDetail.semester);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -77,7 +78,7 @@ class DetailFindPaper extends StatelessWidget {
                     child: Wrap(
                       spacing: 20,
                       runSpacing: 20,
-                      children: _buildSemCardList(branchDetail),
+                      children: _buildSemCardList(context, branchDetail),
                     ),
                   )
                 ],
@@ -89,11 +90,28 @@ class DetailFindPaper extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildSemCardList(FindPaper branchDetail) {
+  List<Widget> _buildSemCardList(context, FindPaper branchDetail) {
     List<Widget> listItems = [];
-    for (var semester in branchDetail.semester.keys) {
-      listItems.add(SemCard(semester: semester));
+    for (int i = 0; i < branchDetail.semester.keys.length; i++) {
+      listItems.add(InkWell(
+          onTap: () => _gotoSubjectPage(context, branchDetail.semester.values.elementAt(i)),
+          child: AnimationConfiguration.staggeredGrid(
+              position: i,
+              columnCount: 2,
+              duration: const Duration(milliseconds: 800),
+              child: SlideAnimation(
+                  child: SemCard(
+                      semester: branchDetail.semester.keys.elementAt(i))))));
     }
     return listItems;
+  }
+
+  _gotoSubjectPage(context, curruntBranch) {
+    print(curruntBranch);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                SubjectSelectionScreen(subjectDetails: curruntBranch)));
   }
 }
