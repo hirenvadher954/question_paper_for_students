@@ -94,7 +94,11 @@ class DetailFindPaper extends StatelessWidget {
     List<Widget> listItems = [];
     for (int i = 0; i < branchDetail.semester.keys.length; i++) {
       listItems.add(InkWell(
-          onTap: () => _gotoSubjectPage(context, branchDetail.semester.values.elementAt(i)),
+          onTap: () => _gotoSubjectPage(
+                context,
+                branchDetail,
+                // branchDetail.semester.values.elementAt(i),
+              ),
           child: AnimationConfiguration.staggeredGrid(
               position: i,
               columnCount: 2,
@@ -111,7 +115,8 @@ class DetailFindPaper extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                SubjectSelectionScreen(subjectDetails: curruntBranch)));
+            builder: (context) => SubjectSelectionScreen(
+              branchDetail: curruntBranch,
+                )));
   }
 }
