@@ -26,7 +26,11 @@ class MyApp extends StatelessWidget {
               imgSrc:
                   "https://firebasestorage.googleapis.com/v0/b/gtu-question-paper.appspot.com/o/Branch%20Images%2FIT.svg?alt=media&token=1deaaa58-96d7-4535-a389-0aab5b5c8557",
               branchName: "Computer",
-              semester: {"1&2": "Java"}),
+              semester: {
+                "1&2": "Java",
+                "bc":"23"
+              }),
+          index: 0,
         ),
         // DetailFindPaper(
         //   branchDetail: FindPaper(

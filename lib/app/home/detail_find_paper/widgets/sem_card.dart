@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/constants.dart';
 
 class SemCard extends StatelessWidget {
-  const SemCard({required this.semester});
+  const SemCard({required this.cardTitle});
 
-  final String semester;
+  final String cardTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SemCard extends StatelessWidget {
               width: 10,
             ),
             Text(
-              "Sem $semester",
+              "Sem $cardTitle",
               style: Theme.of(context).textTheme.subtitle2,
             )
           ],

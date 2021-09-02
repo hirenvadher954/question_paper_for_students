@@ -105,18 +105,18 @@ class DetailFindPaper extends StatelessWidget {
               duration: const Duration(milliseconds: 800),
               child: SlideAnimation(
                   child: SemCard(
-                      semester: branchDetail.semester.keys.elementAt(i))))));
+                      cardTitle: branchDetail.semester.keys.elementAt(i))))));
     }
     return listItems;
   }
 
   _gotoSubjectPage(context, curruntBranch) {
     print(curruntBranch);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SubjectSelectionScreen(
-              branchDetail: curruntBranch,
-                )));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => SubjectSelectionScreen(
+    //           branchDetail: curruntBranch,
+    //             )));
   }
 }
