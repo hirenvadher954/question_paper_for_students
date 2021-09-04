@@ -32,7 +32,7 @@ class SubjectSelectionScreen extends StatelessWidget {
             ),
             SliverList(
                 delegate: SliverChildListDelegate(
-              _buildSubjectList(context, size, branchDetail, 0),
+              _buildSubjectList(context, size, branchDetail, index),
             )),
           ],
         ),
@@ -44,46 +44,41 @@ class SubjectSelectionScreen extends StatelessWidget {
 List<Widget> _buildSubjectList(
     context, Size size, FindPaper branchDetail, int index) {
   List<Widget> listItems = [];
-  listItems.add(SingleChildScrollView(
-    child: Container(
-      color: Colors.lightBlue[100],
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Wrap(spacing: 20, runSpacing: 20, children: [
-          SemCard(
-            cardTitle: 'Java',
+  listItems.add(Container(
+    color: kLightBlueColor,
+    child: Padding(
+      padding: EdgeInsets.all(20),
+      child: SizedBox(
+        height: size.height,
+        child: SingleChildScrollView(
+          child: Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            children: _buildSubjectCardList(context, branchDetail, index),
           ),
-          SemCard(
-            cardTitle: 'Test',
-          ),
-          SemCard(
-            cardTitle: 'Test',
-          )
-        ]
-            // _buildSubjectCardList(context, branchDetail, index),
-            ),
+        ),
       ),
     ),
   ));
-
   return listItems;
 }
 
 List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
+  final subjectCount =
+      branchDetail.semester.values.elementAt(index)["subjects"].length;
+  List<String> subjectList =
+      branchDetail.semester.values.elementAt(index)["subjects"].keys.toList();
   List<Widget> listItems = [];
-  for (int i = 0; i < branchDetail.semester.values.length; i++) {
+  for (int i = 0; i < subjectList.length; i++) {
     listItems.add(InkWell(
       onTap: () => {},
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AnimationConfiguration.staggeredGrid(
-          position: i,
-          columnCount: 2,
-          duration: const Duration(milliseconds: 800),
-          child: SlideAnimation(
-            child: SemCard(
-              cardTitle: "abc",
-            ),
+      child: AnimationConfiguration.staggeredGrid(
+        position: i,
+        columnCount: 2,
+        duration: const Duration(milliseconds: 800),
+        child: SlideAnimation(
+          child: SemCard(
+            cardTitle: subjectList[i],
           ),
         ),
       ),
@@ -139,34 +134,58 @@ class SubjectSilverAppBar extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
             child: Align(
               alignment: AlignmentDirectional.topEnd,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: size.height * 0.05,
-                  ),
-                  AutoSizeText(
-                    branchDetail.branchName,
-                    style: GoogleFonts.oswald(
-                        fontWeight: FontWeight.bold, fontSize: 35),
-                    maxLines: 1,
-                  ),
-                  SizedBox(
-                    height: size.height * 0.025,
-                  ),
-                  SizedBox(
-                    width: size.width * .55,
-                    child: Text(
-                        "ipsum is text is written by me to check wheater text fit in proper."),
-                  ),
-                  SizedBox(
-                    width: size.width * .5,
-                    child: SearchBar(),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: size.height * 0.05,
+                    ),
+                    Hero(
+                      tag: branchDetail.semester,
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: Text(
+                          branchDetail.branchName,
+                          style: GoogleFonts.oswald(
+                              fontWeight: FontWeight.bold, fontSize: 35),
+                          maxLines: 1,
+                          // maxLines: 1,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.025,
+                    ),
+                    Hero(
+                      tag: 'quoteText',
+                      child: SizedBox(
+                        width: size.width * .55,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: Text(
+                              "Quote must be small to read.",
+                              // maxLines: 3,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Hero(
+                      tag: 'serchBar',
+                      child: SizedBox(
+                        width: size.width * .5,
+                        child: Material(
+                            type: MaterialType.transparency, child: SearchBar()),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -174,7 +193,7 @@ class SubjectSilverAppBar extends StatelessWidget {
             child: Container(
               height: 30,
               decoration: BoxDecoration(
-                color: Colors.lightBlue[100],
+                color: kLightBlueColor,
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(50),
                 ),

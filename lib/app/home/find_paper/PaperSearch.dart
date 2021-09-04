@@ -7,6 +7,8 @@ import 'package:gtu_question_paper/app/home/find_paper/widgets/BranchCard.dart';
 import 'package:gtu_question_paper/common_widgets/gradient_silver_app_bar.dart';
 import 'package:gtu_question_paper/repository/find_paper/firebase_find_paper_repository.dart';
 
+import '../../../constants.dart';
+
 class PaperSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class PaperSearchPage extends StatelessWidget {
       }
       final paperList = state.paperList;
       return Container(
-        color: Colors.lightBlue[100],
+        color:kLightBlueColor,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SizedBox(

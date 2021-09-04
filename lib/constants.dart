@@ -8,3 +8,4 @@ const kBlueColor = Color(0xFF817DC0);
 const kShadowColor = Color(0xFFE6E6E6);
 const kCardGradientFirst = Color(0XFF8693ab);
 const kCardGradientSecond = Color(0XFFbdd4e7);
+const kLightBlueColor =  Color(0XFFb3e5fc);

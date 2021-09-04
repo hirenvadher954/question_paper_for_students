@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gtu_question_paper/app/home/paper_selection_screen/PaperSelectionScreen.dart';
+import 'package:gtu_question_paper/app/landing_page.dart';
 import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 import 'package:gtu_question_paper/services/auth.dart';
+import 'package:gtu_question_paper/services/database.dart';
 import 'package:gtu_question_paper/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -21,17 +24,19 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'GTU Question Paper',
         theme: theme,
-        home: SubjectSelectionScreen(
-          branchDetail: FindPaper(
-              imgSrc:
-                  "https://firebasestorage.googleapis.com/v0/b/gtu-question-paper.appspot.com/o/Branch%20Images%2FIT.svg?alt=media&token=1deaaa58-96d7-4535-a389-0aab5b5c8557",
-              branchName: "Computer",
-              semester: {
-                "1&2": "Java",
-                "bc":"23"
-              }),
-          index: 0,
-        ),
+        home: PaperSelectionScreen(),
+        // SubjectSelectionScreen(
+        //   branchDetail: FindPaper(
+        //       imgSrc:
+        //           "https://firebasestorage.googleapis.com/v0/b/gtu-question-paper.appspot.com/o/Branch%20Images%2FIT.svg?alt=media&token=1deaaa58-96d7-4535-a389-0aab5b5c8557",
+        //       branchName: "Computer",
+        //       semester: {
+        //         "1&2": "Java",
+        //         "bc":"23",
+        //         "cd":"2343"
+        //       }),
+        //   index: 0,
+        // ),
         // DetailFindPaper(
         //   branchDetail: FindPaper(
         //       imgSrc:

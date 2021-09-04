@@ -35,7 +35,7 @@ class SemCard extends StatelessWidget {
               width: 10,
             ),
             Text(
-              "Sem $cardTitle",
+              cardTitle,
               style: Theme.of(context).textTheme.subtitle2,
             )
           ],

@@ -54,22 +54,44 @@ class DetailFindPaper extends StatelessWidget {
                   SizedBox(
                     height: size.height * 0.05,
                   ),
-                  Text(
-                    branchDetail.branchName,
-                    style: GoogleFonts.oswald(
-                        fontWeight: FontWeight.bold, fontSize: 35),
+                  Hero(
+                    tag: branchDetail.semester,
+                    transitionOnUserGestures: true,
+                    child: SizedBox(
+                      width: size.width,
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: Text(
+                          branchDetail.branchName,
+                          style: GoogleFonts.oswald(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                    width: size.width * .6,
-                    child: Text(
-                        "ipsum is text is written by me to check wheater text fit in proper."),
+                  Hero(
+                    tag: 'quoteText',
+                    child: SizedBox(
+                      width: size.width * .6,
+                      child: Material(
+                          type: MaterialType.transparency,
+                        child: Text(
+                            "Quote must be small to read."),
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    width: size.width * .5,
-                    child: SearchBar(),
+                  Hero(
+                    tag: 'serchBar',
+                    child: SizedBox(
+                      width: size.width * .5,
+                      child: Material(
+                          type: MaterialType.transparency, child: SearchBar()),
+                    ),
                   ),
                   SizedBox(
                     height: 30,
@@ -94,10 +116,8 @@ class DetailFindPaper extends StatelessWidget {
     List<Widget> listItems = [];
     for (int i = 0; i < branchDetail.semester.keys.length; i++) {
       listItems.add(InkWell(
-          onTap: () => _gotoSubjectPage(
-                context,
-                branchDetail,
-                // branchDetail.semester.values.elementAt(i),
+          onTap: () => _gotoSubjectPage(context, branchDetail, i
+              // branchDetail.semester.values.elementAt(i),
               ),
           child: AnimationConfiguration.staggeredGrid(
               position: i,
@@ -105,18 +125,22 @@ class DetailFindPaper extends StatelessWidget {
               duration: const Duration(milliseconds: 800),
               child: SlideAnimation(
                   child: SemCard(
-                      cardTitle: branchDetail.semester.keys.elementAt(i))))));
+                      cardTitle:
+                          " Sem ${branchDetail.semester.keys.elementAt(i)}")))));
     }
     return listItems;
   }
 
-  _gotoSubjectPage(context, curruntBranch) {
+  _gotoSubjectPage(context, curruntBranch, index) {
     print(curruntBranch);
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => SubjectSelectionScreen(
-    //           branchDetail: curruntBranch,
-    //             )));
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            transitionDuration: Duration(seconds: 1),
+            pageBuilder: (context, animation1, animation2) =>
+                SubjectSelectionScreen(
+                  branchDetail: curruntBranch,
+                  index: index,
+                )));
   }
 }
