@@ -14,89 +14,69 @@ class _PaperSelectionScreenState extends State<PaperSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("GridView"),
-          actions: [
-            PopupMenuButton<int>(
-              itemBuilder: (context) {
-                return <PopupMenuEntry<int>>[
-                  ...[
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                  ]
-                      .map((e) => PopupMenuItem<int>(
-                            value: e,
-                            child: Text("$e"),
-                          ))
-                      .toList(),
-                ];
-              },
-              onSelected: (count) {
-                setState(() {
-                  _count = count;
-                });
-              },
-            )
-          ],
+      appBar: AppBar(
+        title: Text("Java"),
+      ),
+      body: GridView.builder(
+        physics: BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 3.5),
         ),
-        body: Container(
-          child: GridView.count(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            crossAxisCount: _count,
-            children: WeatherType.values
-                .map((e) => GridItemWidget(
-                      weatherType: e,
-                      count: _count,
-                    ))
-                .toList(),
-          ),
-        ));
+        itemBuilder: (BuildContext context, int index) {
+          return ListItemWidget(
+            weatherType: WeatherType.values[index],
+          );
+        },
+        // separatorBuilder: (BuildContext context, int index) {
+        //   return SizedBox(
+        //     height: 5,
+        //   );
+        // },
+        itemCount: WeatherType.values.length,
+      ),
+    );
   }
 }
 
-class GridItemWidget extends StatelessWidget {
+class ListItemWidget extends StatelessWidget {
   final WeatherType weatherType;
-  final int count;
 
-  GridItemWidget({Key? key, required this.weatherType, required this.count})
-      : super(key: key);
+  ListItemWidget({Key? key, required this.weatherType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var radius = 20.0 - 2 * count;
-    var margin = 10.0 - count;
     return Card(
-      elevation: 6,
-      margin: EdgeInsets.all(margin),
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: ClipPath(
-        clipper: ShapeBorderClipper(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(radius))),
         child: Stack(
           children: [
             WeatherBg(
               weatherType: weatherType,
-              width: MediaQuery.of(context).size.width / count,
-              height: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 2,
+              height: 200,
             ),
-            Center(
+            Container(
+              alignment: Alignment(-0.8, 0),
+              height: 100,
               child: Text(
                 "2018",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30 / count,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold),
               ),
-            )
+            ),
           ],
         ),
+        clipper: ShapeBorderClipper(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)))),
       ),
     );
   }
