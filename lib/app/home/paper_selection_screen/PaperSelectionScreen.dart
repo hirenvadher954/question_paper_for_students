@@ -85,12 +85,12 @@ class ListItemWidget extends StatelessWidget {
 
   void _loadPdf(context) async {
     final url =
-        'https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf';
+        'https://www.gtu.ac.in/uploads/W2020/BE/2150603.pdf';
     final file = await PDFApi.loadNetwork(url);
-    openPDF(context, file);
+    openPDF(context, url);
   }
 
-  void openPDF(BuildContext context, File file) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)),
+  void openPDF(BuildContext context, String url) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PDFViewerPage(url: url)),
       );
 }

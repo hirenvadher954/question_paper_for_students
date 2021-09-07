@@ -1,14 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path/path.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PDFViewerPage extends StatefulWidget {
-  final File file;
+  final String url;
 
   const PDFViewerPage({
-    required this.file,
+    required this.url,
   });
 
   @override
@@ -16,25 +13,23 @@ class PDFViewerPage extends StatefulWidget {
 }
 
 class _PDFViewerPageState extends State<PDFViewerPage> {
-  late PDFViewController controller;
+  late PdfViewerController _pdfViewerController;
+
+  @override
+  void initState() {
+    _pdfViewerController = PdfViewerController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final name = basename(widget.file.path);
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(name),
-      ),
-      body: PDFView(
-        filePath: widget.file.path,
-        nightMode: false,
-        autoSpacing: false,
-        pageSnap: false,
-        pageFling: false,
-        onViewCreated: (controller) =>
-            setState(() => this.controller = controller),
-      ),
-    );
+        appBar: AppBar(
+          title: Text("appbar"),
+        ),
+        body: Container(
+          color: Colors.black,
+          child: SfPdfViewer.network(widget.url),
+        ));
   }
 }

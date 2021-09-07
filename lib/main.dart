@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'GTU Question Paper',
         theme: theme,
+        themeMode: ThemeMode.light,
         home: PaperSelectionScreen(),
         // SubjectSelectionScreen(
         //   branchDetail: FindPaper(
