@@ -1,10 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
+import 'package:gtu_question_paper/app/home/paper_selection_screen/PaperSelectionScreen.dart';
 import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 
 import '../../../constants.dart';
@@ -71,7 +71,12 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
   List<Widget> listItems = [];
   for (int i = 0; i < subjectList.length; i++) {
     listItems.add(InkWell(
-      onTap: () => {},
+      onTap: () => {
+        navigateToPaperYearSelection(
+            context,
+            branchDetail.semester.values.elementAt(index)["subjects"]
+                [subjectList[i]])
+      },
       child: AnimationConfiguration.staggeredGrid(
         position: i,
         columnCount: 2,
@@ -85,6 +90,15 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
     ));
   }
   return listItems;
+}
+
+void navigateToPaperYearSelection(context, Map<String, dynamic> paperList) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => PaperSelectionScreen(
+                paperList: paperList,
+              )));
 }
 
 class SubjectSilverAppBar extends StatelessWidget {
@@ -178,7 +192,8 @@ class SubjectSilverAppBar extends StatelessWidget {
                       child: SizedBox(
                         width: size.width * .5,
                         child: Material(
-                            type: MaterialType.transparency, child: SearchBar()),
+                            type: MaterialType.transparency,
+                            child: SearchBar()),
                       ),
                     ),
                     SizedBox(

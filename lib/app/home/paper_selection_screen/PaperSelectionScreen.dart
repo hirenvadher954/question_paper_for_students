@@ -1,23 +1,42 @@
-import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 import 'package:gtu_question_paper/common_widgets/pdf_viewer_page.dart';
-import 'package:gtu_question_paper/services/PDFApi.dart';
 
-class PaperSelectionScreen extends StatefulWidget {
-  const PaperSelectionScreen({Key? key}) : super(key: key);
-
-  @override
-  _PaperSelectionScreenState createState() => _PaperSelectionScreenState();
+enum SummerPaper {
+  sunnyNight,
+  sunny,
+  cloudy,
+  cloudyNight,
+  overcast,
+  hazy,
+  foggy,
+}
+enum WinterPaper {
+  heavyRainy,
+  heavySnow,
+  middleSnow,
+  thunder,
+  lightRainy,
+  lightSnow,
+  middleRainy
 }
 
-class _PaperSelectionScreenState extends State<PaperSelectionScreen> {
-  int _count = 2;
+class PaperSelectionScreen extends StatelessWidget {
+  PaperSelectionScreen({required this.paperList});
+
+  final Map<String, dynamic> paperList;
+  final int _count = 2;
+  Random random = new Random();
 
   @override
   Widget build(BuildContext context) {
+    int randomNumber = random.nextInt(6);
+    print(randomNumber);
+    print(paperList);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -26,67 +45,85 @@ class _PaperSelectionScreenState extends State<PaperSelectionScreen> {
       body: GridView.builder(
         physics: BouncingScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: _count,
           childAspectRatio: MediaQuery.of(context).size.width /
               (MediaQuery.of(context).size.height / 3.5),
         ),
         itemBuilder: (BuildContext context, int index) {
           return ListItemWidget(
-            weatherType: WeatherType.values[index],
-          );
+              paperList: paperList, index: index, random: randomNumber);
         },
-        itemCount: WeatherType.values.length,
+        itemCount: paperList.length,
       ),
     );
   }
 }
 
 class ListItemWidget extends StatelessWidget {
-  final WeatherType weatherType;
+  ListItemWidget(
+      {required this.paperList, required this.index, required this.random});
 
-  ListItemWidget({Key? key, required this.weatherType}) : super(key: key);
+  final int index;
+  final int random;
+  final Map<String, dynamic> paperList;
 
   @override
   Widget build(BuildContext context) {
+    String paperTitle = paperList.keys.toList()[index];
+    print(WinterPaper.values.firstWhere((element) =>
+        element.toString() == WeatherType.values[random].toString()));
+    // weatherType = paperTitle.contains('winter')
+    //     ? WeatherType.values.firstWhere(
+    //         (e) => e.toString() == WinterPaper.values[random].toString())
+    //     : WeatherType.values.firstWhere(
+    //         (e) => e.toString() == SummerPaper.values[random].toString());
+    final WeatherType weatherType = WeatherType.cloudy;
     return InkWell(
-      onTap: () => _loadPdf(context),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: ClipPath(
-          child: Stack(
-            children: [
-              WeatherBg(
-                weatherType: weatherType,
-                width: MediaQuery.of(context).size.width / 2,
-                height: 200,
+      onTap: () => _loadPdf(context, paperList[paperTitle]),
+      child: AnimationConfiguration.staggeredGrid(
+        position: index,
+        columnCount: 2,
+        duration: const Duration(milliseconds: 800),
+        child: SlideAnimation(
+          child: Card(
+            elevation: 4,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            child: ClipPath(
+              child: Stack(
+                children: [
+                  WeatherBg(
+                    weatherType: weatherType,
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 200,
+                  ),
+                  Container(
+                    alignment: Alignment(-0.8, 0),
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        paperTitle.toString(),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                alignment: Alignment(-0.8, 0),
-                height: 100,
-                child: Text(
-                  "2018",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
+              clipper: ShapeBorderClipper(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)))),
+            ),
           ),
-          clipper: ShapeBorderClipper(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)))),
         ),
       ),
     );
   }
 
-  void _loadPdf(context) async {
-    final url =
-        'https://www.gtu.ac.in/uploads/W2020/BE/2150603.pdf';
-    final file = await PDFApi.loadNetwork(url);
+  void _loadPdf(context, url) async {
     openPDF(context, url);
   }
 
