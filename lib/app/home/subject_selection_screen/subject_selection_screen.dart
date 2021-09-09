@@ -64,8 +64,6 @@ List<Widget> _buildSubjectList(
 }
 
 List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
-  final subjectCount =
-      branchDetail.semester.values.elementAt(index)["subjects"].length;
   List<String> subjectList =
       branchDetail.semester.values.elementAt(index)["subjects"].keys.toList();
   List<Widget> listItems = [];
@@ -74,6 +72,7 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
       onTap: () => {
         navigateToPaperYearSelection(
             context,
+            subjectList[i],
             branchDetail.semester.values.elementAt(index)["subjects"]
                 [subjectList[i]])
       },
@@ -92,11 +91,13 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
   return listItems;
 }
 
-void navigateToPaperYearSelection(context, Map<String, dynamic> paperList) {
+void navigateToPaperYearSelection(
+    context, subjectName, Map<String, dynamic> paperList) {
   Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => PaperSelectionScreen(
+                subjectName: subjectName,
                 paperList: paperList,
               )));
 }

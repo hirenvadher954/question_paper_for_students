@@ -6,41 +6,36 @@ import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 import 'package:gtu_question_paper/common_widgets/pdf_viewer_page.dart';
 
-enum SummerPaper {
-  sunnyNight,
-  sunny,
-  cloudy,
-  cloudyNight,
-  overcast,
-  hazy,
-  foggy,
-}
-enum WinterPaper {
-  heavyRainy,
-  heavySnow,
-  middleSnow,
-  thunder,
-  lightRainy,
-  lightSnow,
-  middleRainy
-}
+List<WeatherType> summerPaper = [
+  WeatherType.sunnyNight,
+  WeatherType.sunny,
+  WeatherType.cloudy,
+  WeatherType.cloudyNight,
+  WeatherType.overcast,
+];
+List<WeatherType> winterPaper = [
+  WeatherType.heavyRainy,
+  WeatherType.heavySnow,
+  WeatherType.middleSnow,
+  WeatherType.thunder,
+  WeatherType.lightRainy,
+  WeatherType.lightSnow,
+  WeatherType.middleRainy
+];
 
 class PaperSelectionScreen extends StatelessWidget {
-  PaperSelectionScreen({required this.paperList});
+  PaperSelectionScreen({required this.paperList, required this.subjectName});
 
+  final String subjectName;
   final Map<String, dynamic> paperList;
   final int _count = 2;
-  Random random = new Random();
 
   @override
   Widget build(BuildContext context) {
-    int randomNumber = random.nextInt(6);
-    print(randomNumber);
     print(paperList);
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Java"),
+        title: Text(subjectName),
       ),
       body: GridView.builder(
         physics: BouncingScrollPhysics(),
@@ -50,8 +45,7 @@ class PaperSelectionScreen extends StatelessWidget {
               (MediaQuery.of(context).size.height / 3.5),
         ),
         itemBuilder: (BuildContext context, int index) {
-          return ListItemWidget(
-              paperList: paperList, index: index, random: randomNumber);
+          return ListItemWidget(paperList: paperList, index: index);
         },
         itemCount: paperList.length,
       ),
@@ -59,29 +53,34 @@ class PaperSelectionScreen extends StatelessWidget {
   }
 }
 
-class ListItemWidget extends StatelessWidget {
-  ListItemWidget(
-      {required this.paperList, required this.index, required this.random});
+class ListItemWidget extends StatefulWidget {
+  ListItemWidget({required this.paperList, required this.index});
 
   final int index;
-  final int random;
   final Map<String, dynamic> paperList;
 
   @override
+  _ListItemWidgetState createState() => _ListItemWidgetState();
+}
+
+class _ListItemWidgetState extends State<ListItemWidget> {
+  Random random = new Random();
+
+  @override
   Widget build(BuildContext context) {
-    String paperTitle = paperList.keys.toList()[index];
-    print(WinterPaper.values.firstWhere((element) =>
-        element.toString() == WeatherType.values[random].toString()));
-    // weatherType = paperTitle.contains('winter')
-    //     ? WeatherType.values.firstWhere(
-    //         (e) => e.toString() == WinterPaper.values[random].toString())
-    //     : WeatherType.values.firstWhere(
-    //         (e) => e.toString() == SummerPaper.values[random].toString());
-    final WeatherType weatherType = WeatherType.cloudy;
+    String paperTitle = widget.paperList.keys.toList()[widget.index];
+    String year = paperTitle.toString().toUpperCase().split('-')[0];
+    String season = paperTitle.toString().toUpperCase().split('-')[1];
+    final WeatherType weatherType = paperTitle.contains('winter')
+        ? winterPaper[random.nextInt(7)]
+        : summerPaper[random.nextInt(5)];
+
+    final Color color =
+        paperTitle.contains('summer') ? Colors.deepOrangeAccent : Colors.yellow;
     return InkWell(
-      onTap: () => _loadPdf(context, paperList[paperTitle]),
+      onTap: () => _loadPdf(context, widget.paperList[paperTitle]),
       child: AnimationConfiguration.staggeredGrid(
-        position: index,
+        position: widget.index,
         columnCount: 2,
         duration: const Duration(milliseconds: 800),
         child: SlideAnimation(
@@ -102,12 +101,12 @@ class ListItemWidget extends StatelessWidget {
                     alignment: Alignment(-0.8, 0),
                     height: 100,
                     child: Center(
-                      child: Text(
-                        paperTitle.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildColumnText(season, color),
+                          buildColumnText(year, color),
+                        ],
                       ),
                     ),
                   ),
@@ -120,6 +119,13 @@ class ListItemWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Text buildColumnText(String text, Color color) {
+    return Text(
+      text,
+      style: TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 

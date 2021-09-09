@@ -22,7 +22,17 @@ class MyApp extends StatelessWidget {
         theme: theme,
         themeMode: ThemeMode.light,
         home:
-            // PaperSelectionScreen(),
+            // PaperSelectionScreen(
+            //   subjectName: "ABC",
+            //   paperList: {
+            //     "2018-summer": "paperlink",
+            //     "2019-winter": "paperlink",
+            //     "2020-summer": "paperlink",
+            //     "2021-winter": "paperlink",
+            //     "2022-summer": "paperlink",
+            //     "2023-winter": "paperlink",
+            //   },
+            // ),
             // SubjectSelectionScreen(
             //   branchDetail: FindPaper(
             //       imgSrc:

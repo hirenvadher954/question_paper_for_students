@@ -28,7 +28,7 @@ class SemCard extends StatelessWidget {
               height: 42,
               width: 43,
               decoration:
-              BoxDecoration(color: kBlueColor, shape: BoxShape.circle),
+                  BoxDecoration(color: kBlueColor, shape: BoxShape.circle),
               child: Icon(Icons.play_arrow, color: Colors.white),
             ),
             SizedBox(
