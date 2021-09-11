@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({this.margin = 30});
+
   final double margin;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,12 +16,14 @@ class SearchBar extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: "Search",
+          hintText: "Search Question ",
           icon: Icon(
             Icons.search,
             size: 30,
           ),
           border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
         ),
       ),
     );

@@ -50,8 +50,14 @@ class PaperSearchPage extends StatelessWidget {
         );
       }
       final paperList = state.paperList;
+      paperList.sort((a, b) {
+        return a.branchName
+            .toString()
+            .toLowerCase()
+            .compareTo(b.branchName.toString().toLowerCase());
+      });
       return Container(
-        color:kLightBlueColor,
+        color: kLightBlueColor,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SizedBox(
@@ -60,10 +66,10 @@ class PaperSearchPage extends StatelessWidget {
               children: [
                 Expanded(
                     child: GridView.builder(
-                  itemCount: paperList.length,
-                  physics: ScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      itemCount: paperList.length,
+                      physics: ScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                       crossAxisSpacing: 20.0,
                       mainAxisSpacing: 20.0,
                       childAspectRatio: 0.85),
