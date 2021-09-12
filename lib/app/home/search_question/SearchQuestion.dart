@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gtu_question_paper/app/home/selected_search_question/SelectedSearchQuesteion.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_question_repository.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_questions_api_client.dart';
 import 'package:http/http.dart' as http;
@@ -44,7 +45,6 @@ class _SearchQuestionState extends State<SearchQuestion> {
   @override
   Widget build(BuildContext context) {
     RegExp htmlRegExp = RegExp(r"<[^>]*>");
-    RegExp quotesRegExp = RegExp(r"“");
     return BlocProvider<TopicQuestionsBloc>(
       create: (context) => _topicQuestionsBloc,
       child: SafeArea(
@@ -54,7 +54,7 @@ class _SearchQuestionState extends State<SearchQuestion> {
             child: Column(
               children: [
                 buildSearchBar(),
-                const Divider(
+                 Divider(
                   thickness: 3,
                   // indent: 20,
                   // endIndent: 20,
@@ -69,8 +69,10 @@ class _SearchQuestionState extends State<SearchQuestion> {
                               query: textEditionController.text));
                     }
                     if (state is TopicQuestionsError) {
-                      return Center(
-                        child: Text('failed to fetch quote'),
+                      return Expanded(
+                        child: Center(
+                          child: Text('Failed to fetch questions'),
+                        ),
                       );
                     }
                     if (state is TopicQuestionsLoaded) {
@@ -90,21 +92,30 @@ class _SearchQuestionState extends State<SearchQuestion> {
                             searchedQuestion = searchedQuestion
                                 .replaceAll('â', '"')
                                 .replaceAll("â", '"');
-                            return Container(
-                                margin: EdgeInsets.only(top: 10),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 14),
-                                decoration: BoxDecoration(
-                                  color: Colors.black38.withAlpha(10),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(7),
+                            return InkWell(
+                              onTap: () => _gotoSelectedQuestion(
+                                  listOfSearchTopicQuestions
+                                      .elementAt(index)
+                                      .topicId,
+                                  listOfSearchTopicQuestions
+                                      .elementAt(index)
+                                      .qaId),
+                              child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 4, horizontal: 14),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black38.withAlpha(10),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(7),
+                                    ),
                                   ),
-                                ),
-                                child: AutoSizeText(
-                                  searchedQuestion,
-                                  style:
-                                      GoogleFonts.robotoCondensed(fontSize: 17),
-                                ));
+                                  child: AutoSizeText(
+                                    searchedQuestion,
+                                    style: GoogleFonts.robotoCondensed(
+                                        fontSize: 17),
+                                  )),
+                            );
                           },
                           itemCount: state.searchTopicQuestions.length,
                         ),
@@ -135,7 +146,6 @@ class _SearchQuestionState extends State<SearchQuestion> {
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),
-      
       ),
       child: Row(
         children: <Widget>[
@@ -159,5 +169,15 @@ class _SearchQuestionState extends State<SearchQuestion> {
         ],
       ),
     );
+  }
+
+  _gotoSelectedQuestion(int topicId, int qaId) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SelectedSearchQuestion(
+                  topicId: topicId,
+                  qaId: qaId,
+                )));
   }
 }

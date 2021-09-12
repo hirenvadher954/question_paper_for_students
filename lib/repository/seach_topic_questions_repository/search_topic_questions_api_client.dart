@@ -1,4 +1,5 @@
 import 'package:gtu_question_paper/app/home/search_question/models/search_topic_questions.dart';
+import 'package:gtu_question_paper/app/home/selected_search_question/models/selected_topic_question.dart';
 import 'package:http/http.dart' as http;
 
 class SearchTopicQuestionsApiClient {
@@ -18,11 +19,16 @@ class SearchTopicQuestionsApiClient {
     if (response.statusCode != 200) {
       throw new Exception('error getting quotes');
     }
-
-    // final json = jsonDecode(response.body);
-    print("searchTopicQuestionsFromJson");
-    // print(json.runtimeType);
     return searchTopicQuestionsFromJson(response.body);
-    // SearchTopicQuestions.fromJson(json);
+  }
+
+  Future<List<SelectedTopicQuestion>> fetchSelectedQuestion(
+      int topicId, int qaId) async {
+    final url = '$_baseUrl/getcustomeQAbyid/$topicId/$qaId';
+    final response = await this.httpClient.get(Uri.parse(url));
+    if (response.statusCode != 200) {
+      throw new Exception('error getting quotes');
+    }
+    return selectedTopicQuestionFromJson(response.body);
   }
 }
