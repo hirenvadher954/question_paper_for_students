@@ -90,7 +90,7 @@ class DetailFindPaper extends StatelessWidget {
                     child: SizedBox(
                       width: size.width * .5,
                       child: Material(
-                          type: MaterialType.transparency, child: SearchBar()),
+                          type: MaterialType.transparency, child: SearchBar(hintText: "Search Questions",)),
                     ),
                   ),
                   SizedBox(

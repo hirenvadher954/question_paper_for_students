@@ -194,7 +194,7 @@ class SubjectSilverAppBar extends StatelessWidget {
                         width: size.width * .5,
                         child: Material(
                             type: MaterialType.transparency,
-                            child: SearchBar()),
+                            child: SearchBar(hintText: "Search Questions",)),
                       ),
                     ),
                     SizedBox(

@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/selected_search_question/SelectedSearchQuesteion.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_question_repository.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_questions_api_client.dart';
@@ -55,7 +53,7 @@ class _SearchQuestionState extends State<SearchQuestion> {
             child: Column(
               children: [
                 buildSearchBar(),
-                 Divider(
+                Divider(
                   thickness: 3,
                   // indent: 20,
                   // endIndent: 20,
@@ -94,30 +92,30 @@ class _SearchQuestionState extends State<SearchQuestion> {
                                 .replaceAll('â', '"')
                                 .replaceAll("â", '"');
                             return InkWell(
-                              onTap: () => _gotoSelectedQuestion(
-                                  listOfSearchTopicQuestions
-                                      .elementAt(index)
-                                      .topicId,
-                                  listOfSearchTopicQuestions
-                                      .elementAt(index)
-                                      .qaId),
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 14),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black38.withAlpha(10),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(7),
+                                onTap: () => _gotoSelectedQuestion(
+                                    listOfSearchTopicQuestions
+                                        .elementAt(index)
+                                        .topicId,
+                                    listOfSearchTopicQuestions
+                                        .elementAt(index)
+                                        .qaId),
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4, horizontal: 14),
+                                    decoration: BoxDecoration(
+                                      color: Colors.black38.withAlpha(10),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(7),
+                                      ),
                                     ),
-                                  ),
-                                  child: HtmlWidget(searchedQuestion))
-                                  // AutoSizeText(
-                                  //   searchedQuestion,
-                                  //   style: GoogleFonts.robotoCondensed(
-                                  //       fontSize: 17),
-                                  // )),
-                            );
+                                    child: HtmlWidget(searchedQuestion))
+                                // AutoSizeText(
+                                //   searchedQuestion,
+                                //   style: GoogleFonts.robotoCondensed(
+                                //       fontSize: 17),
+                                // )),
+                                );
                           },
                           itemCount: state.searchTopicQuestions.length,
                         ),
@@ -182,4 +180,6 @@ class _SearchQuestionState extends State<SearchQuestion> {
                   qaId: qaId,
                 )));
   }
+
+
 }
