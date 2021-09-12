@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/selected_search_question/SelectedSearchQuesteion.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_question_repository.dart';
@@ -84,10 +85,10 @@ class _SearchQuestionState extends State<SearchQuestion> {
                             String searchedQuestion = listOfSearchTopicQuestions
                                 .elementAt(index)
                                 .topicQuestion;
-                            if (htmlRegExp.hasMatch(searchedQuestion)) {
-                              searchedQuestion =
-                                  searchedQuestion.replaceAll(htmlRegExp, "");
-                            }
+                            // if (htmlRegExp.hasMatch(searchedQuestion)) {
+                            //   searchedQuestion =
+                            //       searchedQuestion.replaceAll(htmlRegExp, "");
+                            // }
 
                             searchedQuestion = searchedQuestion
                                 .replaceAll('â', '"')
@@ -110,11 +111,12 @@ class _SearchQuestionState extends State<SearchQuestion> {
                                       Radius.circular(7),
                                     ),
                                   ),
-                                  child: AutoSizeText(
-                                    searchedQuestion,
-                                    style: GoogleFonts.robotoCondensed(
-                                        fontSize: 17),
-                                  )),
+                                  child: HtmlWidget(searchedQuestion))
+                                  // AutoSizeText(
+                                  //   searchedQuestion,
+                                  //   style: GoogleFonts.robotoCondensed(
+                                  //       fontSize: 17),
+                                  // )),
                             );
                           },
                           itemCount: state.searchTopicQuestions.length,

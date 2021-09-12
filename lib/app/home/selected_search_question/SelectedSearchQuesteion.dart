@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/selected_search_question/bloc/selected_question_bloc.dart';
 import 'package:gtu_question_paper/repository/seach_topic_questions_repository/search_topic_question_repository.dart';
@@ -62,63 +62,51 @@ class _SelectedSearchQuestionState extends State<SelectedSearchQuestion> {
                     final listOfSelectedQuestions = state.selectedTopicQuestion;
 
                     return Expanded(
-                        child: ListView.builder(itemBuilder: (context, index) {
-                      String topicQuestion = listOfSelectedQuestions
-                          .elementAt(index)
-                          .topicQuestion;
-                      String topicAnswer =
-                          listOfSelectedQuestions.elementAt(index).topicAnswer;
+                        child: ListView.builder(
+                            itemCount: listOfSelectedQuestions.length,
+                            itemBuilder: (context, index) {
+                              String topicQuestion = listOfSelectedQuestions
+                                  .elementAt(index)
+                                  .topicQuestion;
+                              topicQuestion = "Q - " + topicQuestion;
+                              String topicAnswer = listOfSelectedQuestions
+                                  .elementAt(index)
+                                  .topicAnswer;
 
-                      if (htmlRegExp.hasMatch(topicQuestion)) {
-                        topicQuestion =
-                            topicQuestion.replaceAll(htmlRegExp, "");
-                      }
+                              // if (htmlRegExp.hasMatch(topicQuestion)) {
+                              //   topicQuestion =
+                              //       topicQuestion.replaceAll(htmlRegExp, "");
+                              // }
 
-                      topicQuestion = removeUnwantedChar(topicQuestion);
-                      topicAnswer = removeUnwantedChar(topicAnswer);
-                      return Container(
-                          child: Column(
-                        children: [
-                          Text("Q - " + topicQuestion,
-                              style: GoogleFonts.robotoCondensed(
-                                  fontSize: 17, fontWeight: FontWeight.bold)),
-                          Html(data: topicAnswer, style: {
-                            "table": Style(
-                              backgroundColor:
-                                  Color.fromARGB(0x50, 0xee, 0xee, 0xee),
-                            ),
-                            "tr": Style(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.grey)),
-                            ),
-                            "th": Style(
-                              padding: EdgeInsets.all(1),
-                              backgroundColor: Colors.grey,
-                            ),
-                            // "td": Style(
-                            //   padding: EdgeInsets.all(1),
-                            //   alignment: Alignment.topLeft,
-                            // ),
-                            'h5': Style(
-                                maxLines: 2,
-                                textOverflow: TextOverflow.ellipsis),
-                          }, customRender: {
-                            "table": (context, child) {
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: (context.tree as TableLayoutElement)
-                                    .toWidget(context),
-                              );
-                            },
-                          }),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.blueGrey,
-                            height: 20,
-                          ),
-                        ],
-                      ));
-                    }));
+                              topicQuestion = removeUnwantedChar(topicQuestion);
+                              topicAnswer = removeUnwantedChar(topicAnswer);
+                              return Container(
+                                  child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: HtmlWidget(
+                                      topicQuestion,
+                                      textStyle: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily:
+                                              GoogleFonts.robotoCondensed()
+                                                  .fontFamily),
+                                    ),
+                                  ),
+                                  // Text("Q - " + topicQuestion,
+                                  //     style: GoogleFonts.robotoCondensed(
+                                  //         fontSize: 17, fontWeight: FontWeight.bold)),
+                                  HtmlWidget(topicAnswer),
+                                  Divider(
+                                    thickness: 3,
+                                    color: Colors.blueGrey,
+                                    height: 20,
+                                  ),
+                                ],
+                              ));
+                            }));
                   }
                   return Expanded(
                       child: Center(
