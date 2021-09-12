@@ -8,7 +8,7 @@ class SearchTopicQuestionsRepository {
 
   SearchTopicQuestionsRepository({required this.searchTopicQuestionsApiClient});
 
-  Future<List<SearchTopicQuestions>> fetchSearchQuestions() async {
-    return await searchTopicQuestionsApiClient.fetchSearchQuestions();
+  Future<List<SearchTopicQuestions>> fetchSearchQuestions(String query) async {
+    return await searchTopicQuestionsApiClient.fetchSearchQuestions(query);
   }
 }

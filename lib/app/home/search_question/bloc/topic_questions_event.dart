@@ -4,9 +4,12 @@ abstract class TopicQuestionsEvent extends Equatable {
   const TopicQuestionsEvent();
 }
 
+
 class FetchTopicQuestions extends TopicQuestionsEvent {
-  const FetchTopicQuestions();
+  const FetchTopicQuestions({required this.query});
+
+  final String query;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [query];
 }

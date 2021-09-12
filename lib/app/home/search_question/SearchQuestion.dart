@@ -19,6 +19,8 @@ class _SearchQuestionState extends State<SearchQuestion> {
       SearchTopicQuestionsRepository(
           searchTopicQuestionsApiClient:
               SearchTopicQuestionsApiClient(httpClient: http.Client()));
+  late TopicQuestionsBloc _topicQuestionsBloc =
+      TopicQuestionsBloc(repository: repository);
 
   @override
   void initState() {
@@ -27,7 +29,10 @@ class _SearchQuestionState extends State<SearchQuestion> {
   }
 
   void _printLatestValue() {
-    print('Second text field: ${textEditionController.text}');
+    print("__printLatestValue ${textEditionController.text}");
+    _topicQuestionsBloc
+        .add(FetchTopicQuestions(query: textEditionController.text));
+    // repository.fetchSearchQuestions(textEditionController.text);
   }
 
   @override
@@ -38,9 +43,10 @@ class _SearchQuestionState extends State<SearchQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    RegExp regExp = new RegExp(r"<[^>]*>");
+    RegExp htmlRegExp = RegExp(r"<[^>]*>");
+    RegExp quotesRegExp = RegExp(r"“");
     return BlocProvider<TopicQuestionsBloc>(
-      create: (context) => TopicQuestionsBloc(repository: repository),
+      create: (context) => _topicQuestionsBloc,
       child: SafeArea(
         child: Scaffold(
           body: Padding(
@@ -48,11 +54,19 @@ class _SearchQuestionState extends State<SearchQuestion> {
             child: Column(
               children: [
                 buildSearchBar(),
+                const Divider(
+                  thickness: 3,
+                  // indent: 20,
+                  // endIndent: 20,
+                  color: Colors.blueGrey,
+                  height: 20,
+                ),
                 BlocBuilder<TopicQuestionsBloc, TopicQuestionsState>(
                   builder: (context, state) {
                     if (state is TopicQuestionsEmpty) {
-                      BlocProvider.of<TopicQuestionsBloc>(context)
-                          .add(FetchTopicQuestions());
+                      BlocProvider.of<TopicQuestionsBloc>(context).add(
+                          FetchTopicQuestions(
+                              query: textEditionController.text));
                     }
                     if (state is TopicQuestionsError) {
                       return Center(
@@ -68,11 +82,14 @@ class _SearchQuestionState extends State<SearchQuestion> {
                             String searchedQuestion = listOfSearchTopicQuestions
                                 .elementAt(index)
                                 .topicQuestion;
-                            if (regExp.hasMatch(searchedQuestion)) {
+                            if (htmlRegExp.hasMatch(searchedQuestion)) {
                               searchedQuestion =
-                                  searchedQuestion.replaceAll(regExp,"");
+                                  searchedQuestion.replaceAll(htmlRegExp, "");
                             }
 
+                            searchedQuestion = searchedQuestion
+                                .replaceAll('â', '"')
+                                .replaceAll("â", '"');
                             return Container(
                                 margin: EdgeInsets.only(top: 10),
                                 padding: const EdgeInsets.symmetric(
@@ -83,16 +100,21 @@ class _SearchQuestionState extends State<SearchQuestion> {
                                     Radius.circular(7),
                                   ),
                                 ),
-                                child: AutoSizeText(searchedQuestion,
-                                    style: GoogleFonts.robotoCondensed(
-                                        fontSize: 15)));
+                                child: AutoSizeText(
+                                  searchedQuestion,
+                                  style:
+                                      GoogleFonts.robotoCondensed(fontSize: 17),
+                                ));
                           },
                           itemCount: state.searchTopicQuestions.length,
                         ),
                       );
                     }
-                    return Center(
-                      child: CircularProgressIndicator(),
+
+                    return Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   },
                 )
@@ -109,10 +131,11 @@ class _SearchQuestionState extends State<SearchQuestion> {
       margin: EdgeInsets.only(top: 10),
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.black38.withAlpha(10),
+        color: Colors.black38.withAlpha(30),
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),
+      
       ),
       child: Row(
         children: <Widget>[

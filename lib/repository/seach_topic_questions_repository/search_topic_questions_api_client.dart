@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:gtu_question_paper/app/home/search_question/models/search_topic_questions.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,8 +9,11 @@ class SearchTopicQuestionsApiClient {
     required this.httpClient,
   });
 
-  Future<List<SearchTopicQuestions>> fetchSearchQuestions() async {
-    final url = '$_baseUrl/mainsearch/java';
+  Future<List<SearchTopicQuestions>> fetchSearchQuestions(String query) async {
+    final url = query.length != 0
+        ? '$_baseUrl/mainsearch/$query'
+        : '$_baseUrl/mainsearch/java';
+
     final response = await this.httpClient.get(Uri.parse(url));
     if (response.statusCode != 200) {
       throw new Exception('error getting quotes');
