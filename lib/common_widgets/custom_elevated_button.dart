@@ -5,7 +5,7 @@ class CustomElevatedButton extends StatelessWidget {
   CustomElevatedButton(
       {required this.child,
       required this.color,
-      this.borderRadius: 2.0,
+      this.borderRadius: 12.0,
       this.height: 50.0,
       required this.onPressed});
 
@@ -27,7 +27,6 @@ class CustomElevatedButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-
         ),
       ),
     );
