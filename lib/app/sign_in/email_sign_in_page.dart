@@ -5,19 +5,13 @@ class EmailSignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign in'),
-        elevation: 2.0,
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Card(
-              child: EmailSignInFormChangeNotifier.create(context),
-            ),
-          ),
-        ),
+      // appBar: AppBar(
+      //   title: Text('Sign in'),
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0.0,
+      // ),
+      body: SingleChildScrollView(
+        child: EmailSignInFormChangeNotifier.create(context),
       ),
       backgroundColor: Colors.grey[200],
     );
