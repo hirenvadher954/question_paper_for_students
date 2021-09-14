@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/GradientContainer.dart';
-import 'package:gtu_question_paper/app/home/find_paper/widgets/Quote.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
+import 'package:gtu_question_paper/app/home/quote/quote.dart';
 
 class GradientSilverAppBar extends StatelessWidget {
   const GradientSilverAppBar({
@@ -33,8 +33,15 @@ class GradientSilverAppBar extends StatelessWidget {
                 child: ListView(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Quote(textTheme: textTheme),
-                      SearchBar(margin: 60,hintText: "Search Paper Questions",spacing: 0.02,fontSize: 15,)
+                      Quote(
+                        fontSize: 28,
+                      ),
+                      SearchBar(
+                        margin: 60,
+                        hintText: "Search Paper Questions",
+                        spacing: 0.02,
+                        fontSize: 15,
+                      )
                     ])),
             Positioned(
               child: Container(
@@ -58,5 +65,4 @@ class GradientSilverAppBar extends StatelessWidget {
           ],
         ));
   }
-
 }

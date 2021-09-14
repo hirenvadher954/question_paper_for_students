@@ -22,13 +22,11 @@ class TopicQuestionsBloc
     if (event is FetchTopicQuestions) {
       yield TopicQuestionsLoading();
       try {
-        print("In try ${event.query}");
         final List<SearchTopicQuestions> searchTopicQuestions =
             await repository.fetchSearchQuestions(event.query);
         yield TopicQuestionsLoaded(searchTopicQuestions: searchTopicQuestions);
         // yield TopicQuestionsEmpty();
       } catch (e) {
-        print(" IN error${e.toString()}");
         yield TopicQuestionsError();
       }
     }

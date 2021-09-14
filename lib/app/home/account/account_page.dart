@@ -33,7 +33,6 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    final curruntUser = auth.currentUser!;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
