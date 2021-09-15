@@ -7,6 +7,8 @@ import 'package:gtu_question_paper/common_widgets/show_alert_dialog.dart';
 import 'package:gtu_question_paper/services/auth.dart';
 import 'package:provider/provider.dart';
 
+import 'privacy_policy/PrivacyPolicy.dart';
+
 class AccountPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -63,33 +65,42 @@ class AccountPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            buildButtons(size, context, "Privacy Policy", GradientColors.blue),
-            buildButtons(size, context, "About Us", GradientColors.blue),
+            buildButtons(size, context, "Privacy Policy", GradientColors.blue,
+                PrivacyPolicy()),
+            buildButtons(
+                size, context, "About Us", GradientColors.blue, PrivacyPolicy())
           ],
         ),
       ),
     );
   }
 
-  Widget buildButtons(
-      Size size, BuildContext context, String text, List<Color> colors) {
+  Widget buildButtons(Size size, BuildContext context, String text,
+      List<Color> colors, Widget screenName) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: size.height * 0.1,
-        decoration: new BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: colors,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => screenName));
+        },
+        child: Container(
+          height: size.height * 0.1,
+          decoration: new BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: colors,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
+          child: Center(
+              child: Text(
+            text,
+            style:
+                GoogleFonts.robotoCondensed(fontSize: 20, color: Colors.white),
+          )),
         ),
-        child: Center(
-            child: Text(
-          text,
-          style: GoogleFonts.robotoCondensed(fontSize: 20, color: Colors.white),
-        )),
       ),
     );
   }
