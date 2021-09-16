@@ -7,6 +7,7 @@ import 'package:gtu_question_paper/common_widgets/show_alert_dialog.dart';
 import 'package:gtu_question_paper/services/auth.dart';
 import 'package:provider/provider.dart';
 
+import 'contact_us/contact_us.dart';
 import 'privacy_policy/PrivacyPolicy.dart';
 
 class AccountPage extends StatelessWidget {
@@ -65,10 +66,10 @@ class AccountPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
+            buildButtons(size, context, "Contact Us", GradientColors.blue,
+                ContactUsPage()),
             buildButtons(size, context, "Privacy Policy", GradientColors.blue,
                 PrivacyPolicy()),
-            buildButtons(
-                size, context, "About Us", GradientColors.blue, PrivacyPolicy())
           ],
         ),
       ),

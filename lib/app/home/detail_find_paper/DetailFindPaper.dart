@@ -74,17 +74,17 @@ class DetailFindPaper extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Hero(
-                    tag: 'quoteText',
-                    child: SizedBox(
-                      width: size.width * .6,
-                      child: Material(
-                          type: MaterialType.transparency,
-                        child: Text(
-                            "Quote must be small to read."),
-                      ),
-                    ),
-                  ),
+                  // Hero(
+                  //   tag: 'quoteText',
+                  //   child: SizedBox(
+                  //     width: size.width * .6,
+                  //     child: Material(
+                  //         type: MaterialType.transparency,
+                  //       child: Text(
+                  //           "Quote must be small to read."),
+                  //     ),
+                  //   ),
+                  // ),
                   Hero(
                     tag: 'serchBar',
                     child: SizedBox(

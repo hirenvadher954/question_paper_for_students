@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gtu_question_paper/app/landing_page.dart';
 import 'package:gtu_question_paper/services/auth.dart';
-import 'package:gtu_question_paper/services/database.dart';
 import 'package:gtu_question_paper/theme.dart';
 import 'package:provider/provider.dart';
 
-import 'app/landing_page.dart';
+import 'services/database.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           theme: theme,
           themeMode: ThemeMode.light,
           home:
-              // SearchQuestion(),
+              // ContactUsPage(),
 
               LandingPage(
             databaseBuilder: (uid) => FirestoreDataBase(uid: uid),

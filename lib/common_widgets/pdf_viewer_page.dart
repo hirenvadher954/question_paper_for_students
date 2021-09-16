@@ -3,10 +3,9 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PDFViewerPage extends StatefulWidget {
   final String url;
+  final String title;
 
-  const PDFViewerPage({
-    required this.url,
-  });
+  const PDFViewerPage({required this.url, required this.title});
 
   @override
   _PDFViewerPageState createState() => _PDFViewerPageState();
@@ -25,11 +24,14 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("appbar"),
+          title: Text(widget.title),
         ),
         body: Container(
           color: Colors.black,
-          child: SfPdfViewer.network(widget.url),
+          child: SfPdfViewer.network(
+            widget.url,
+            controller: _pdfViewerController,
+          ),
         ));
   }
 }

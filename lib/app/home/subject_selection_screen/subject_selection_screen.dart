@@ -172,22 +172,22 @@ class SubjectSilverAppBar extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.025,
                     ),
-                    Hero(
-                      tag: 'quoteText',
-                      child: SizedBox(
-                        width: size.width * .55,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: Text(
-                              "Quote must be small to read.",
-                              // maxLines: 3,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Hero(
+                    //   tag: 'quoteText',
+                    //   child: SizedBox(
+                    //     width: size.width * .55,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child: Material(
+                    //         type: MaterialType.transparency,
+                    //         child: Text(
+                    //           "Quote must be small to read.",
+                    //           // maxLines: 3,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Hero(
                       tag: 'serchBar',
                       child: SizedBox(

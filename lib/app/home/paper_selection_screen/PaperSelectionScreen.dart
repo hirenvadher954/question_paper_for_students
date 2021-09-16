@@ -78,7 +78,8 @@ class _ListItemWidgetState extends State<ListItemWidget> {
     final Color color =
         paperTitle.contains('summer') ? Colors.deepOrangeAccent : Colors.yellow;
     return InkWell(
-      onTap: () => _loadPdf(context, widget.paperList[paperTitle]),
+      onTap: () =>
+          _loadPdf(context, widget.paperList[paperTitle], "$year - $season"),
       child: AnimationConfiguration.staggeredGrid(
         position: widget.index,
         columnCount: 2,
@@ -129,11 +130,13 @@ class _ListItemWidgetState extends State<ListItemWidget> {
     );
   }
 
-  void _loadPdf(context, url) async {
-    openPDF(context, url);
+  void _loadPdf(context, url, title) async {
+    openPDF(context, url, title);
   }
 
-  void openPDF(BuildContext context, String url) => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => PDFViewerPage(url: url)),
+  void openPDF(BuildContext context, String url, String title) =>
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => PDFViewerPage(url: url, title: title)),
       );
 }

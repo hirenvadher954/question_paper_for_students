@@ -36,6 +36,8 @@ dependencies:
   flutter_gradient_colors: ^2.1.1
   animated_text_kit: ^4.2.0
   flutter_fadein: ^2.0.0
+  contactus: ^1.2.0
+  webview_flutter: ^2.0.13
 
 dev_dependencies:
   flutter_test:

@@ -25,20 +25,14 @@ class Quote extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Hero(
-                    tag: 'quoteText',
-                    child: Material(
-                      type: MaterialType.transparency,
-                      child: Text(
-                        state.randomQuote.content,
-                        style: GoogleFonts.robotoSlab(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                        maxLines: 3,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
+                  Text(
+                    state.randomQuote.content,
+                    style: GoogleFonts.robotoSlab(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87),
+                    maxLines: 3,
+                    textAlign: TextAlign.start,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
