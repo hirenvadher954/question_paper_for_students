@@ -36,7 +36,7 @@ class ContactUsPage extends StatelessWidget {
                 taglineColor: Colors.greenAccent,
                 email: "hirenvadher954@gmail.com",
                 linkedinURL: "https://www.linkedin.com/in/hiren-vadher/",
-                githubUserName: "hirenvadher9/54",
+                githubUserName: "hirenvadher954",
               ),
             ),
 

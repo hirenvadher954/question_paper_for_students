@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NewsPage extends StatelessWidget {
-  const NewsPage({Key? key}) : super(key: key);
+class NotesPage extends StatelessWidget {
+  const NotesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("news section"),
+        title: Text("Notes"),
       ),
     );
   }
