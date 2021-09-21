@@ -66,7 +66,7 @@ class AccountPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            buildButtons(size, context, "Contact Me", GradientColors.blue,
+            buildButtons(size, context, "Contact Us", GradientColors.blue,
                 ContactUsPage()),
             buildButtons(size, context, "Privacy Policy", GradientColors.blue,
                 PrivacyPolicy()),
