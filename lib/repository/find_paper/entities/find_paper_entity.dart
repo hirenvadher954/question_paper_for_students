@@ -41,4 +41,5 @@ class FindPaperEntity extends Equatable {
   Map<String, Object?> toDocument() {
     return {'branchName': branchName, 'imgSrc': imgSrc, 'semester': semester};
   }
+
 }
