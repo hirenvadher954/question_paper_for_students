@@ -34,7 +34,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
         color: Colors.greenAccent,
       ),
       child: AutoSizeText(
-        "It will take some time to load the pdf because of slow internet connection",
+        "It will take some time to load pdf because of slow internet connection",
         maxLines: 3,
       ),
     );
