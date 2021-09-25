@@ -82,9 +82,12 @@ class NotesPage extends StatelessWidget {
     );
   }
 
-  void openPDF(BuildContext context, String url, String title) =>
+  void openPDF(BuildContext context, String url, String title) {
+    if (url.isNotEmpty) {
       Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => PDFViewerPage(url: url, title: title)),
       );
+    }
+  }
 }
