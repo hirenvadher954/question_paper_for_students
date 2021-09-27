@@ -64,6 +64,7 @@ List<Widget> _buildSubjectList(
 }
 
 List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
+  // Size size = MediaQuery.of(context).size;
   List<String> subjectList =
       branchDetail.semester.values.elementAt(index)["subjects"].keys.toList();
   List<Widget> listItems = [];
@@ -82,6 +83,7 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
         duration: const Duration(milliseconds: 800),
         child: SlideAnimation(
           child: SemCard(
+            screen: "subjectScreen",
             cardTitle: subjectList[i],
           ),
         ),

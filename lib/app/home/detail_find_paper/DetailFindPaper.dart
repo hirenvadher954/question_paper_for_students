@@ -94,7 +94,7 @@ class DetailFindPaper extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery.of(context).size.height*.1,
                   ),
                   SingleChildScrollView(
                     child: Wrap(
@@ -125,6 +125,7 @@ class DetailFindPaper extends StatelessWidget {
               duration: const Duration(milliseconds: 800),
               child: SlideAnimation(
                   child: SemCard(
+                    screen: "detailFindPaperScreen",
                       cardTitle:
                           " Sem ${branchDetail.semester.keys.elementAt(i)}")))));
     }

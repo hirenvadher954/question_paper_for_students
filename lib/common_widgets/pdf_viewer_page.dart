@@ -23,7 +23,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     super.initState();
     fToast = FToast();
     fToast.init(context);
-    Future.delayed(Duration(seconds: 2), _showToast);
+    // Future.delayed(Duration(seconds: 2), _showToast);
   }
 
   _showToast() {

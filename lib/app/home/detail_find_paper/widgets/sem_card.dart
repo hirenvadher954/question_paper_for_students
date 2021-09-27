@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/constants.dart';
 
 class SemCard extends StatelessWidget {
-  const SemCard({required this.cardTitle});
+  const SemCard({required this.cardTitle, required this.screen});
 
   final String cardTitle;
+  final String screen;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraint) {
       return Container(
-        width: constraint.maxWidth / 2 - 10,
+        width: screen == "detailFindPaperScreen"
+            ? constraint.maxWidth / 2 - 10
+            : constraint.maxWidth,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
             color: Colors.white,

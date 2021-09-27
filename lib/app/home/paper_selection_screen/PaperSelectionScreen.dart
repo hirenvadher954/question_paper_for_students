@@ -69,14 +69,14 @@ class _ListItemWidgetState extends State<ListItemWidget> {
   @override
   Widget build(BuildContext context) {
     String paperTitle = widget.paperList.keys.toList()[widget.index];
-    String year = paperTitle.toString().toUpperCase().split('-')[0];
-    String season = paperTitle.toString().toUpperCase().split('-')[1];
-    final WeatherType weatherType = paperTitle.contains('winter')
+    String year = "20" + paperTitle[1] + paperTitle[2];
+    String season = paperTitle.toString()[0] == "s" ? "Summer" : "Winter";
+    final WeatherType weatherType = paperTitle.contains('w')
         ? winterPaper[random.nextInt(7)]
         : summerPaper[random.nextInt(5)];
 
     final Color color =
-        paperTitle.contains('summer') ? Colors.deepOrangeAccent : Colors.yellow;
+        paperTitle.contains('s') ? Colors.deepOrangeAccent : Colors.yellow;
     return InkWell(
       onTap: () =>
           _loadPdf(context, widget.paperList[paperTitle], "$year - $season"),
