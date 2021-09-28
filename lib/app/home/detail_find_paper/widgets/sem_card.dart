@@ -37,9 +37,13 @@ class SemCard extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            Text(
-              cardTitle,
-              style: Theme.of(context).textTheme.subtitle2,
+            Flexible(
+              child: Text(
+                cardTitle,
+                // style: Theme.of(context).textTheme.subtitle2,
+                style: TextStyle(fontSize: 15.0),
+                maxLines: 2,
+              ),
             )
           ],
         ),

@@ -90,11 +90,14 @@ class DetailFindPaper extends StatelessWidget {
                     child: SizedBox(
                       width: size.width * .5,
                       child: Material(
-                          type: MaterialType.transparency, child: SearchBar(hintText: "Search Questions",)),
+                          type: MaterialType.transparency,
+                          child: SearchBar(
+                            hintText: "Search Questions",
+                          )),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*.1,
+                    height: MediaQuery.of(context).size.height * .1,
                   ),
                   SingleChildScrollView(
                     child: Wrap(
@@ -113,6 +116,12 @@ class DetailFindPaper extends StatelessWidget {
   }
 
   List<Widget> _buildSemCardList(context, FindPaper branchDetail) {
+    final newBranchDetail = branchDetail.semester.keys.toList();
+
+    //     .sort((a, b) {
+    //   return int.parse(a[0]).compareTo(int.parse(b[0]));
+    // });
+    print("newBranchDetail");
     List<Widget> listItems = [];
     for (int i = 0; i < branchDetail.semester.keys.length; i++) {
       listItems.add(InkWell(
@@ -125,7 +134,7 @@ class DetailFindPaper extends StatelessWidget {
               duration: const Duration(milliseconds: 800),
               child: SlideAnimation(
                   child: SemCard(
-                    screen: "detailFindPaperScreen",
+                      screen: "detailFindPaperScreen",
                       cardTitle:
                           " Sem ${branchDetail.semester.keys.elementAt(i)}")))));
     }
