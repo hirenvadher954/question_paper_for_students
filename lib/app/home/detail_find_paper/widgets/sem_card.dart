@@ -32,7 +32,11 @@ class SemCard extends StatelessWidget {
               width: 43,
               decoration:
                   BoxDecoration(color: kBlueColor, shape: BoxShape.circle),
-              child: Icon(Icons.play_arrow, color: Colors.white),
+              child: Icon(
+                  screen == "detailFindPaperScreen"
+                      ? Icons.book
+                      : Icons.local_library,
+                  color: Colors.white),
             ),
             SizedBox(
               width: 10,

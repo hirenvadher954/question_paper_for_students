@@ -121,7 +121,7 @@ packages:
     source: hosted
     version: "2.4.2"
   collection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: collection
       url: "https://pub.dartlang.org"
@@ -279,13 +279,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  flutter_pdfview:
-    dependency: "direct main"
-    description:
-      name: flutter_pdfview
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.1"
   flutter_staggered_animations:
     dependency: "direct main"
     description:
@@ -500,7 +493,7 @@ packages:
     source: hosted
     version: "1.0.0+1"
   path:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path
       url: "https://pub.dartlang.org"
@@ -521,7 +514,7 @@ packages:
     source: hosted
     version: "0.2.1"
   path_provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider
       url: "https://pub.dartlang.org"

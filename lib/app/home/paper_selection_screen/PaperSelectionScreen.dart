@@ -78,8 +78,13 @@ class _ListItemWidgetState extends State<ListItemWidget> {
     final Color color =
         paperTitle.contains('s') ? Colors.deepOrangeAccent : Colors.yellow;
     return InkWell(
-      onTap: () =>
-          _loadPdf(context, widget.paperList[paperTitle], "$year - $season"),
+      onTap: () => {
+        Navigator.push(
+            context,
+            SizeTransionAnimation(PDFViewerPage(
+                url: widget.paperList[paperTitle], title: "$year - $season")))
+        // openPDF(context, widget.paperList[paperTitle], "$year - $season")
+      },
       child: AnimationConfiguration.staggeredGrid(
         position: widget.index,
         columnCount: 2,
@@ -130,13 +135,34 @@ class _ListItemWidgetState extends State<ListItemWidget> {
     );
   }
 
-  void _loadPdf(context, url, title) async {
-    openPDF(context, url, title);
-  }
-
   void openPDF(BuildContext context, String url, String title) =>
       Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => PDFViewerPage(url: url, title: title)),
       );
+}
+
+class SizeTransionAnimation extends PageRouteBuilder {
+  final Widget page;
+
+  SizeTransionAnimation(this.page)
+      : super(
+            pageBuilder: (context, anim1, anim2) => page,
+            transitionDuration: Duration(milliseconds: 1000),
+            reverseTransitionDuration: Duration(milliseconds: 1000),
+            transitionsBuilder: (context, animation, anim2, child) {
+              animation = CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  reverseCurve: Curves.fastOutSlowIn);
+              return Align(
+                alignment: Alignment.center,
+                child: SizeTransition(
+                  axis: Axis.horizontal,
+                  sizeFactor: animation,
+                  child: page,
+                  axisAlignment: 0,
+                ),
+              );
+            });
 }

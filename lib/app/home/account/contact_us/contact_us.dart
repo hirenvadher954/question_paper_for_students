@@ -27,7 +27,7 @@ class ContactUsPage extends StatelessWidget {
           children: [
             Center(
               child: ContactUs(
-                companyName: "Hiren Vadher",
+                companyName: "I'm",
                 companyColor: Colors.orangeAccent,
                 companyFontSize: 45,
                 tagLine: "Flutter Developer",
@@ -40,13 +40,13 @@ class ContactUsPage extends StatelessWidget {
               ),
             ),
 
-            ContactUsBottomAppBar(
-              companyName: 'Hiren Vadher',
-              textColor: Colors.white,
-              backgroundColor: Colors.teal.shade300,
-              email: 'hirenvadher954@gmail.com',
-              // textFont: 'Sail',
-            ),
+            // ContactUsBottomAppBar(
+            //   companyName: '',
+            //   textColor: Colors.white,
+            //   backgroundColor: Colors.teal.shade300,
+            //   email: 'hirenvadher954@gmail.com',
+            //   // textFont: 'Sail',
+            // ),
           ],
         ),
       ),

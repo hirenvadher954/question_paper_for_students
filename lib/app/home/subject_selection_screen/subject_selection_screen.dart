@@ -11,11 +11,14 @@ import '../../../constants.dart';
 
 class SubjectSelectionScreen extends StatelessWidget {
   const SubjectSelectionScreen(
-      {required this.branchDetail, required this.index});
+      {required this.branchDetail,
+      required this.index,
+      required this.seletedKey});
 
   // final Map<String, dynamic> branchDetail;
   final FindPaper branchDetail;
   final int index;
+  final String seletedKey;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class SubjectSelectionScreen extends StatelessWidget {
             ),
             SliverList(
                 delegate: SliverChildListDelegate(
-              _buildSubjectList(context, size, branchDetail, index),
+              _buildSubjectList(context, size, branchDetail, index, seletedKey),
             )),
           ],
         ),
@@ -42,7 +45,7 @@ class SubjectSelectionScreen extends StatelessWidget {
 }
 
 List<Widget> _buildSubjectList(
-    context, Size size, FindPaper branchDetail, int index) {
+    context, Size size, FindPaper branchDetail, int index, String seletedKey) {
   List<Widget> listItems = [];
   listItems.add(Container(
     color: kLightBlueColor,
@@ -54,7 +57,8 @@ List<Widget> _buildSubjectList(
           child: Wrap(
             spacing: 20,
             runSpacing: 20,
-            children: _buildSubjectCardList(context, branchDetail, index),
+            children:
+                _buildSubjectCardList(context, branchDetail, index, seletedKey),
           ),
         ),
       ),
@@ -63,10 +67,11 @@ List<Widget> _buildSubjectList(
   return listItems;
 }
 
-List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
+List<Widget> _buildSubjectCardList(
+    context, FindPaper branchDetail, index, String seletedKey) {
   // Size size = MediaQuery.of(context).size;
   List<String> subjectList =
-      branchDetail.semester.values.elementAt(index)["subjects"].keys.toList();
+      branchDetail.semester[seletedKey]["subjects"].keys.toList();
   List<Widget> listItems = [];
   for (int i = 0; i < subjectList.length; i++) {
     listItems.add(InkWell(
@@ -74,7 +79,7 @@ List<Widget> _buildSubjectCardList(context, FindPaper branchDetail, index) {
         navigateToPaperYearSelection(
             context,
             subjectList[i],
-            branchDetail.semester.values.elementAt(index)["subjects"]
+            branchDetail.semester[seletedKey]["subjects"]
                 [subjectList[i]])
       },
       child: AnimationConfiguration.staggeredGrid(
@@ -196,7 +201,9 @@ class SubjectSilverAppBar extends StatelessWidget {
                         width: size.width * .5,
                         child: Material(
                             type: MaterialType.transparency,
-                            child: SearchBar(hintText: "Search Questions",)),
+                            child: SearchBar(
+                              hintText: "Search Questions",
+                            )),
                       ),
                     ),
                     SizedBox(

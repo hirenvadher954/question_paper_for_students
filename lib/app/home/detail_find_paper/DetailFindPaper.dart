@@ -116,18 +116,19 @@ class DetailFindPaper extends StatelessWidget {
   }
 
   List<Widget> _buildSemCardList(context, FindPaper branchDetail) {
-    final newBranchDetail = branchDetail.semester.keys.toList();
+    final titleList = branchDetail.semester.keys.toList();
 
-    //     .sort((a, b) {
-    //   return int.parse(a[0]).compareTo(int.parse(b[0]));
-    // });
-    print("newBranchDetail");
+    titleList.sort((a, b) {
+      return int.parse(a[0]).compareTo(int.parse(b[0]));
+    });
+    FindPaper tempBranch;
+    for (int i = 0; i < branchDetail.semester.length; i++) {
+      print(branchDetail.semester["3"]);
+    }
     List<Widget> listItems = [];
     for (int i = 0; i < branchDetail.semester.keys.length; i++) {
       listItems.add(InkWell(
-          onTap: () => _gotoSubjectPage(context, branchDetail, i
-              // branchDetail.semester.values.elementAt(i),
-              ),
+          onTap: () => _gotoSubjectPage(context, branchDetail, i, titleList[i]),
           child: AnimationConfiguration.staggeredGrid(
               position: i,
               columnCount: 2,
@@ -135,22 +136,20 @@ class DetailFindPaper extends StatelessWidget {
               child: SlideAnimation(
                   child: SemCard(
                       screen: "detailFindPaperScreen",
-                      cardTitle:
-                          " Sem ${branchDetail.semester.keys.elementAt(i)}")))));
+                      cardTitle: " Sem ${titleList[i]}")))));
     }
     return listItems;
   }
 
-  _gotoSubjectPage(context, curruntBranch, index) {
-    print(curruntBranch);
+  _gotoSubjectPage(context, curruntBranch, index, String seletedKey) {
     Navigator.push(
         context,
         PageRouteBuilder(
             transitionDuration: Duration(seconds: 1),
             pageBuilder: (context, animation1, animation2) =>
                 SubjectSelectionScreen(
-                  branchDetail: curruntBranch,
-                  index: index,
-                )));
+                    branchDetail: curruntBranch,
+                    index: index,
+                    seletedKey: seletedKey)));
   }
 }
