@@ -52,7 +52,7 @@ class Quote extends StatelessWidget {
             if (state is QuotesError) {
               return Center(
                 child: Text(
-                  "Something went wrong :(",
+                  "Our Quote Generator tool is down :(",
                   style: GoogleFonts.robotoSlab(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

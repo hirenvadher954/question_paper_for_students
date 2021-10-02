@@ -154,7 +154,7 @@ class _SearchQuestionState extends State<SearchQuestion> {
               autofocus: true,
               controller: textEditionController,
               decoration: InputDecoration(
-                hintText: "Search Paper Questions",
+                hintText: "Search Paper Solutions",
                 hintStyle: TextStyle(
                   color: Colors.black.withAlpha(120),
                 ),

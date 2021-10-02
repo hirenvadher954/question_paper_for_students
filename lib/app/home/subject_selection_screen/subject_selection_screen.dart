@@ -202,7 +202,7 @@ class SubjectSilverAppBar extends StatelessWidget {
                         child: Material(
                             type: MaterialType.transparency,
                             child: SearchBar(
-                              hintText: "Search Questions",
+                              hintText: "Search Solutions",
                             )),
                       ),
                     ),

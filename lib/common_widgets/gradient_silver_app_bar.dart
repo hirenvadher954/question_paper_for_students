@@ -33,12 +33,12 @@ class GradientSilverAppBar extends StatelessWidget {
                 child: ListView(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Quote(
-                        fontSize: 28,
-                      ),
+                      // Quote(
+                      //   fontSize: 28,
+                      // ),
                       SearchBar(
                         margin: 60,
-                        hintText: "Search Paper Questions",
+                        hintText: "Search Paper Solutions",
                         spacing: 0.02,
                         fontSize: 15,
                       )
