@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/GradientContainer.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
-import 'package:gtu_question_paper/app/home/quote/quote.dart';
 
 class GradientSilverAppBar extends StatelessWidget {
   const GradientSilverAppBar({

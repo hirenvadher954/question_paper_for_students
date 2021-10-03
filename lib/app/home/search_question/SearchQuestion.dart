@@ -43,7 +43,6 @@ class _SearchQuestionState extends State<SearchQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    RegExp htmlRegExp = RegExp(r"<[^>]*>");
     return BlocProvider<TopicQuestionsBloc>(
       create: (context) => _topicQuestionsBloc,
       child: SafeArea(

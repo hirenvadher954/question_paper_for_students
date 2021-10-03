@@ -121,7 +121,6 @@ class DetailFindPaper extends StatelessWidget {
     titleList.sort((a, b) {
       return int.parse(a[0]).compareTo(int.parse(b[0]));
     });
-    FindPaper tempBranch;
     for (int i = 0; i < branchDetail.semester.length; i++) {
       print(branchDetail.semester["3"]);
     }

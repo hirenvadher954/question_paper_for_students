@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gtu_question_paper/repository/find_paper/models/Semester.dart';
 
 class FindPaperEntity extends Equatable {
   const FindPaperEntity(
@@ -41,5 +40,4 @@ class FindPaperEntity extends Equatable {
   Map<String, Object?> toDocument() {
     return {'branchName': branchName, 'imgSrc': imgSrc, 'semester': semester};
   }
-
 }

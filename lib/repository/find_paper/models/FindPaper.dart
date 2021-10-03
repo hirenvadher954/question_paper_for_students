@@ -1,5 +1,4 @@
 import 'package:gtu_question_paper/repository/find_paper/entities/find_paper_entity.dart';
-import 'package:gtu_question_paper/repository/find_paper/models/Semester.dart';
 
 class FindPaper {
   FindPaper(

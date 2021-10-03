@@ -86,7 +86,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.all(32.0),
       child: Column(
