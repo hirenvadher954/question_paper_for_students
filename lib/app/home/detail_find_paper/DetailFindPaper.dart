@@ -121,9 +121,6 @@ class DetailFindPaper extends StatelessWidget {
     titleList.sort((a, b) {
       return int.parse(a[0]).compareTo(int.parse(b[0]));
     });
-    for (int i = 0; i < branchDetail.semester.length; i++) {
-      print(branchDetail.semester["3"]);
-    }
     List<Widget> listItems = [];
     for (int i = 0; i < branchDetail.semester.keys.length; i++) {
       listItems.add(InkWell(

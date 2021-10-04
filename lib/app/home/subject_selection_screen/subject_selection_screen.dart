@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +10,7 @@ import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 
 import '../../../constants.dart';
 
-class SubjectSelectionScreen extends StatelessWidget {
+class SubjectSelectionScreen extends StatefulWidget {
   const SubjectSelectionScreen(
       {required this.branchDetail,
       required this.index,
@@ -19,6 +20,52 @@ class SubjectSelectionScreen extends StatelessWidget {
   final FindPaper branchDetail;
   final int index;
   final String seletedKey;
+
+  @override
+  _SubjectSelectionScreenState createState() => _SubjectSelectionScreenState();
+}
+
+class _SubjectSelectionScreenState extends State<SubjectSelectionScreen> {
+  List<String> subjectList = [];
+  bool isLoading = true;
+  bool isPageFirstTime = true;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.seletedKey != "1&2") {
+      subjectList = widget
+          .branchDetail.semester[widget.seletedKey]["subjects"].keys
+          .toList();
+      isLoading = false;
+    } else {
+      loadFirstYearData();
+    }
+  }
+
+  void loadFirstYearData() async {
+    try {
+      Future<DocumentSnapshot<Map<String, dynamic>>> firstYeaSnapshot =
+          widget.branchDetail.semester[widget.seletedKey]["subjects"].get();
+      firstYeaSnapshot.then((value) async {
+        var firstYearData = value.data();
+        subjectList = await firstYearData!["subjects"]!.keys.toList();
+        widget.branchDetail.semester[widget.seletedKey]["subjects"] =
+            await firstYearData["subjects"]!;
+        setState(() {
+          subjectList = subjectList;
+          isLoading = false;
+        });
+      });
+    } catch (e) {
+      subjectList = widget
+          .branchDetail.semester[widget.seletedKey]["subjects"].keys
+          .toList();
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,71 +78,73 @@ class SubjectSelectionScreen extends StatelessWidget {
             SubjectSilverAppBar(
               size: size,
               textTheme: textTheme,
-              branchDetail: branchDetail,
+              branchDetail: widget.branchDetail,
             ),
             SliverList(
                 delegate: SliverChildListDelegate(
-              _buildSubjectList(context, size, branchDetail, index, seletedKey),
+              _buildSubjectList(context, size, widget.branchDetail,
+                  widget.index, widget.seletedKey),
             )),
           ],
         ),
       ),
     );
   }
-}
 
-List<Widget> _buildSubjectList(
-    context, Size size, FindPaper branchDetail, int index, String seletedKey) {
-  List<Widget> listItems = [];
-  listItems.add(Container(
-    color: kLightBlueColor,
-    child: Padding(
-      padding: EdgeInsets.all(20),
-      child: SizedBox(
-        height: size.height,
-        child: SingleChildScrollView(
-          child: Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            children:
-                _buildSubjectCardList(context, branchDetail, index, seletedKey),
-          ),
-        ),
-      ),
-    ),
-  ));
-  return listItems;
-}
-
-List<Widget> _buildSubjectCardList(
-    context, FindPaper branchDetail, index, String seletedKey) {
-  // Size size = MediaQuery.of(context).size;
-  List<String> subjectList =
-      branchDetail.semester[seletedKey]["subjects"].keys.toList();
-  List<Widget> listItems = [];
-  for (int i = 0; i < subjectList.length; i++) {
-    listItems.add(InkWell(
-      onTap: () => {
-        navigateToPaperYearSelection(
-            context,
-            subjectList[i],
-            branchDetail.semester[seletedKey]["subjects"]
-                [subjectList[i]])
-      },
-      child: AnimationConfiguration.staggeredGrid(
-        position: i,
-        columnCount: 2,
-        duration: const Duration(milliseconds: 800),
-        child: SlideAnimation(
-          child: SemCard(
-            screen: "subjectScreen",
-            cardTitle: subjectList[i],
+  List<Widget> _buildSubjectList(context, Size size, FindPaper branchDetail,
+      int index, String seletedKey) {
+    List<Widget> listItems = [];
+    listItems.add(Container(
+      color: kLightBlueColor,
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: SizedBox(
+          height: size.height,
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: _buildSubjectCardList(
+                  context, branchDetail, index, seletedKey),
+            ),
           ),
         ),
       ),
     ));
+    return listItems;
   }
-  return listItems;
+
+  List<Widget> _buildSubjectCardList(
+      context, FindPaper branchDetail, index, String seletedKey) {
+    List<Widget> listItems = [];
+    subjectList.sort((a, b) => a.compareTo(b));
+    for (int i = 0; i < subjectList.length; i++) {
+      listItems.add(isLoading
+          ? CircularProgressIndicator()
+          : InkWell(
+              onTap: () {
+                print(branchDetail.semester[seletedKey]);
+                navigateToPaperYearSelection(
+                    context,
+                    subjectList[i],
+                    branchDetail.semester[seletedKey]["subjects"]
+                        [subjectList[i]]);
+              },
+              child: AnimationConfiguration.staggeredGrid(
+                position: i,
+                columnCount: 2,
+                duration: const Duration(milliseconds: 800),
+                child: SlideAnimation(
+                  child: SemCard(
+                    screen: "subjectScreen",
+                    cardTitle: subjectList[i],
+                  ),
+                ),
+              ),
+            ));
+    }
+    return listItems;
+  }
 }
 
 void navigateToPaperYearSelection(
