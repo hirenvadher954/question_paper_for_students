@@ -1,8 +1,9 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/GradientContainer.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
 
-class GradientSilverAppBar extends StatelessWidget {
+class GradientSilverAppBar extends StatefulWidget {
   const GradientSilverAppBar({
     Key? key,
     required this.size,
@@ -13,11 +14,22 @@ class GradientSilverAppBar extends StatelessWidget {
   final TextTheme textTheme;
 
   @override
+  _GradientSilverAppBarState createState() => _GradientSilverAppBarState();
+}
+
+class _GradientSilverAppBarState extends State<GradientSilverAppBar> {
+  @override
+  void initState() {
+    FacebookAudienceNetwork.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SliverAppBar(
         floating: false,
         pinned: false,
-        expandedHeight: size.height * 0.4,
+        expandedHeight: widget.size.height * 0.4,
         bottom: PreferredSize(
           child: Container(),
           preferredSize: Size(0, 20),
@@ -40,7 +52,7 @@ class GradientSilverAppBar extends StatelessWidget {
                         hintText: "Search Paper Solutions",
                         spacing: 0.02,
                         fontSize: 15,
-                      )
+                      ),
                     ])),
             Positioned(
               child: Container(

@@ -66,10 +66,10 @@ class PaperSearchPage extends StatelessWidget {
               children: [
                 Expanded(
                     child: GridView.builder(
-                      itemCount: paperList.length,
-                      physics: ScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                  itemCount: paperList.length,
+                  physics: ScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
                       crossAxisSpacing: 20.0,
                       mainAxisSpacing: 20.0,
                       childAspectRatio: 0.85),
