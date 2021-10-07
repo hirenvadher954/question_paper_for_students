@@ -3,6 +3,7 @@ import 'package:gtu_question_paper/app/home/account/account_page.dart';
 import 'package:gtu_question_paper/app/home/find_paper/PaperSearch.dart';
 import 'package:gtu_question_paper/app/home/material_home_scaffold.dart';
 import 'package:gtu_question_paper/app/home/news/Notes_Page.dart';
+import 'package:gtu_question_paper/app/home/search_question/SearchQuestion.dart';
 import 'package:gtu_question_paper/app/home/tab_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +25,8 @@ class _HomePageState extends State<HomePage> {
   Map<TabItem, WidgetBuilder> get widgetBuilders {
     return {
       TabItem.home: (_) => PaperSearchPage(),
-      TabItem.news: (context) => NotesPage(),
+      TabItem.news: (context) => SearchQuestion(),
+      // TabItem.news: (context) => NotesPage(),
       TabItem.account: (_) => AccountPage(),
     };
   }

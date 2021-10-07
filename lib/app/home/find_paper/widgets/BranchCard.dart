@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/constants.dart';
 
@@ -23,9 +22,8 @@ class BranchCard extends StatelessWidget {
           Spacer(),
           Hero(
             tag: branchName,
-            child: SvgPicture.network(
+            child: Image.network(
               imgSrc,
-              placeholderBuilder: (context) => CircularProgressIndicator(),
               height: 80,
             ),
           ),

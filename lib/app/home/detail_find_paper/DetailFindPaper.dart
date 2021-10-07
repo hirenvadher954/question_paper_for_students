@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
@@ -16,6 +15,7 @@ class DetailFindPaper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(branchDetail.imgSrc);
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -34,10 +34,8 @@ class DetailFindPaper extends StatelessWidget {
                     top: size.height * 0.12,
                     child: Hero(
                       tag: branchDetail.branchName,
-                      child: SvgPicture.network(
+                      child: Image.network(
                         branchDetail.imgSrc,
-                        placeholderBuilder: (context) =>
-                            CircularProgressIndicator(),
                         width: size.width * 0.6,
                         fit: BoxFit.fitWidth,
                       ),

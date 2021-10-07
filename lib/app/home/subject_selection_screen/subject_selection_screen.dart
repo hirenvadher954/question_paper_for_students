@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
@@ -100,13 +99,12 @@ class _SubjectSelectionScreenState extends State<SubjectSelectionScreen> {
         padding: EdgeInsets.all(20),
         child: SizedBox(
           height: size.height,
-          child: SingleChildScrollView(
-            child: Wrap(
-              spacing: 20,
-              runSpacing: 20,
-              children: _buildSubjectCardList(
-                  context, branchDetail, index, seletedKey),
-            ),
+          child: Wrap(
+            // spacing: 20,
+            runSpacing: 13,
+
+            children:
+                _buildSubjectCardList(context, branchDetail, index, seletedKey),
           ),
         ),
       ),
@@ -189,10 +187,8 @@ class SubjectSilverAppBar extends StatelessWidget {
                   top: size.height * 0.12,
                   child: Hero(
                     tag: branchDetail.branchName,
-                    child: SvgPicture.network(
+                    child: Image.network(
                       branchDetail.imgSrc,
-                      placeholderBuilder: (context) =>
-                          CircularProgressIndicator(),
                       width: size.width * 0.6,
                       fit: BoxFit.fitWidth,
                     ),
