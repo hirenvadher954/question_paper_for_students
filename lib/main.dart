@@ -1,4 +1,4 @@
-import 'package:facebook_audience_network/facebook_audience_network.dart';
+// import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/services/auth.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    FacebookAudienceNetwork.init();
+    // FacebookAudienceNetwork.init();
     super.initState();
   }
 

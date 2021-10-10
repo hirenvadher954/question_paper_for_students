@@ -8,10 +8,12 @@ version: 1.0.3+4
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+
 dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^1.5.0
+  unity_ads_plugin: ^0.2.4
   firebase_auth: ^3.0.2
   cloud_firestore: ^2.5.0
   google_sign_in: ^5.0.7
@@ -34,7 +36,6 @@ dependencies:
   contactus: ^1.2.0
   webview_flutter: ^2.0.13
   fluttertoast: ^8.0.8
-  facebook_audience_network: 1.0.0-nullsafety.0
 
 dev_dependencies:
   flutter_test:

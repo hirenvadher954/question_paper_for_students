@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
@@ -15,7 +17,6 @@ class DetailFindPaper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(branchDetail.imgSrc);
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -124,15 +125,43 @@ class DetailFindPaper extends StatelessWidget {
     return listItems;
   }
 
+  late FToast fToast;
+
+  _showToast() {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.greenAccent,
+      ),
+      child: AutoSizeText(
+        "Previous Year Paper is not available yet",
+        maxLines: 3,
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 2),
+    );
+  }
+
   _gotoSubjectPage(context, curruntBranch, index, String seletedKey) {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-            transitionDuration: Duration(seconds: 1),
-            pageBuilder: (context, animation1, animation2) =>
-                SubjectSelectionScreen(
-                    branchDetail: curruntBranch,
-                    index: index,
-                    seletedKey: seletedKey)));
+    fToast = FToast();
+    fToast.init(context);
+    if (branchDetail.semester[seletedKey]["subjects"].keys.toList().isEmpty) {
+      _showToast();
+    } else {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              transitionDuration: Duration(seconds: 1),
+              pageBuilder: (context, animation1, animation2) =>
+                  SubjectSelectionScreen(
+                      branchDetail: curruntBranch,
+                      index: index,
+                      seletedKey: seletedKey)));
+    }
   }
 }

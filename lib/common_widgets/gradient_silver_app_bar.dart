@@ -1,8 +1,9 @@
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/GradientContainer.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
 import 'package:gtu_question_paper/constants/ad_unit_id.dart';
+import 'package:unity_ads_plugin/ad/unity_banner_ad.dart';
+import 'package:unity_ads_plugin/unity_ads.dart';
 
 class GradientSilverAppBar extends StatefulWidget {
   const GradientSilverAppBar({
@@ -19,27 +20,33 @@ class GradientSilverAppBar extends StatefulWidget {
 }
 
 class _GradientSilverAppBarState extends State<GradientSilverAppBar> {
+  bool _showBanner = false;
+
   @override
   void initState() {
-    FacebookAudienceNetwork.init();
+    // FacebookAudienceNetwork.init();
     super.initState();
-    loadBannerAd();
+    // loadBannerAd();
+    UnityAds.init(
+      gameId: '4399045',
+      listener: (state, args) => print('Init Listener: $state => $args'),
+    );
   }
 
-  void loadBannerAd() {
-    setState(() {
-      facebookBannerAd = FacebookBannerAd(
-        placementId: AdUnitId.standardBannerId,
-        bannerSize: BannerSize.STANDARD,
-        listener: (result, val) {
-          print(val);
-          print(result);
-        },
-      );
-    });
-  }
+  // void loadBannerAd() {
+  //   setState(() {
+  //     facebookBannerAd = FacebookBannerAd(
+  //       placementId: AdUnitId.standardBannerId,
+  //       bannerSize: BannerSize.STANDARD,
+  //       listener: (result, val) {
+  //         print(val);
+  //         print(result);
+  //       },
+  //     );
+  //   });
+  // }
 
-  FacebookBannerAd? facebookBannerAd;
+  // FacebookBannerAd? facebookBannerAd;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +77,17 @@ class _GradientSilverAppBarState extends State<GradientSilverAppBar> {
                         spacing: 0.02,
                         fontSize: 15,
                       ),
-                      Container(
-                        child: facebookBannerAd,
-                      )
+                      // Container(
+                      //   child: facebookBannerAd,
+                      // )
+                      Center(
+                        child: UnityBannerAd(
+                          placementId: AdUnitId.unityBannerAd,
+                          listener: (state, args) {
+                            print('Banner Listener: $state => $args');
+                          },
+                        ),
+                      ),
                     ])),
             Positioned(
               child: Container(
