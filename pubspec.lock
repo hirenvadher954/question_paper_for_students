@@ -183,6 +183,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  facebook_audience_network:
+    dependency: "direct main"
+    description:
+      name: facebook_audience_network
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0-nullsafety.0"
   fake_async:
     dependency: transitive
     description:
@@ -251,6 +258,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_applovin_max:
+    dependency: "direct main"
+    description:
+      name: flutter_applovin_max
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -756,13 +770,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
-  unity_ads_plugin:
-    dependency: "direct main"
-    description:
-      name: unity_ads_plugin
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.4"
   url_launcher:
     dependency: transitive
     description:
