@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
 import 'package:gtu_question_paper/app/home/subject_selection_screen/subject_selection_screen.dart';
+import 'package:gtu_question_paper/common_widgets/ads/applovin_banner_ads.dart';
 import 'package:gtu_question_paper/constants.dart';
 import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 
@@ -20,6 +21,7 @@ class DetailFindPaper extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: applovinBannerAd(),
         body: Stack(
           children: [
             Container(
@@ -150,7 +152,8 @@ class DetailFindPaper extends StatelessWidget {
   _gotoSubjectPage(context, curruntBranch, index, String seletedKey) {
     fToast = FToast();
     fToast.init(context);
-    if (branchDetail.semester[seletedKey]["subjects"].keys.toList().isEmpty) {
+    if (seletedKey != "1&2" &&
+        branchDetail.semester[seletedKey]["subjects"].keys.toList().isEmpty) {
       _showToast();
     } else {
       Navigator.push(

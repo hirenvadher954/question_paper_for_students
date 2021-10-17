@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_applovin_max/banner.dart';
+import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gtu_question_paper/app/home/detail_find_paper/widgets/sem_card.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
 import 'package:gtu_question_paper/app/home/paper_selection_screen/PaperSelectionScreen.dart';
+import 'package:gtu_question_paper/common_widgets/ads/applovin_banner_ads.dart';
+import 'package:gtu_question_paper/constants/ad_unit_id.dart';
 import 'package:gtu_question_paper/repository/find_paper/models/FindPaper.dart';
 
 import '../../../constants.dart';
@@ -72,6 +76,7 @@ class _SubjectSelectionScreenState extends State<SubjectSelectionScreen> {
     final textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: applovinBannerAd(),
         body: CustomScrollView(
           slivers: [
             SubjectSilverAppBar(
@@ -89,6 +94,8 @@ class _SubjectSelectionScreenState extends State<SubjectSelectionScreen> {
       ),
     );
   }
+
+
 
   List<Widget> _buildSubjectList(context, Size size, FindPaper branchDetail,
       int index, String seletedKey) {

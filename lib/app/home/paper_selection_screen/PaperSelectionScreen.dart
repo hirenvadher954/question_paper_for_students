@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 import 'package:gtu_question_paper/common_widgets/pdf_viewer_page.dart';
+import 'package:gtu_question_paper/constants/ad_unit_id.dart';
 
 List<WeatherType> summerPaper = [
   WeatherType.sunnyNight,
@@ -18,9 +20,7 @@ List<WeatherType> winterPaper = [
   WeatherType.heavySnow,
   WeatherType.middleSnow,
   WeatherType.thunder,
-  WeatherType.lightRainy,
   WeatherType.lightSnow,
-  WeatherType.middleRainy
 ];
 
 class PaperSelectionScreen extends StatelessWidget {
@@ -65,6 +65,20 @@ class ListItemWidget extends StatefulWidget {
 
 class _ListItemWidgetState extends State<ListItemWidget> {
   Random random = new Random();
+  bool isInterstitialVideoAvailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    FlutterApplovinMax.initInterstitialAd(AdUnitId.applovinIntesialId);
+  }
+
+  void listener(AppLovinAdListener? event) {
+    print(event);
+    if (event == AppLovinAdListener.onUserRewarded) {
+      print('👍get reward');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,17 +86,23 @@ class _ListItemWidgetState extends State<ListItemWidget> {
     String year = "20" + paperTitle[1] + paperTitle[2];
     String season = paperTitle.toString()[0] == "s" ? "Summer" : "Winter";
     final WeatherType weatherType = paperTitle.contains('w')
-        ? winterPaper[random.nextInt(7)]
+        ? winterPaper[random.nextInt(5)]
         : summerPaper[random.nextInt(5)];
 
     final Color color =
         paperTitle.contains('s') ? Colors.deepOrangeAccent : Colors.yellow;
     return InkWell(
-      onTap: () => {
+      onTap: () async {
+        isInterstitialVideoAvailable =
+            (await FlutterApplovinMax.isInterstitialLoaded(listener))!;
+        if (isInterstitialVideoAvailable) {
+          FlutterApplovinMax.showInterstitialVideo(
+              (AppLovinAdListener? event) => listener(event));
+        }
         Navigator.push(
             context,
             SizeTransionAnimation(PDFViewerPage(
-                url: widget.paperList[paperTitle], title: "$year - $season")))
+                url: widget.paperList[paperTitle], title: "$year - $season")));
         // openPDF(context, widget.paperList[paperTitle], "$year - $season")
       },
       child: AnimationConfiguration.staggeredGrid(

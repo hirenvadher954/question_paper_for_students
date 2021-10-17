@@ -1,10 +1,11 @@
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applovin_max/banner.dart';
 import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/GradientContainer.dart';
 import 'package:gtu_question_paper/app/home/find_paper/widgets/searchBar.dart';
 import 'package:gtu_question_paper/constants/ad_unit_id.dart';
+
+import 'ads/applovin_banner_ads.dart';
 
 class GradientSilverAppBar extends StatefulWidget {
   const GradientSilverAppBar({
@@ -23,27 +24,8 @@ class GradientSilverAppBar extends StatefulWidget {
 class _GradientSilverAppBarState extends State<GradientSilverAppBar> {
   @override
   void initState() {
-    FacebookAudienceNetwork.init();
     super.initState();
-    // loadBannerAd();
   }
-
-  FacebookBannerAd? facebookBannerAd;
-
-  // void loadBannerAd() {
-  //   setState(() {
-  //     facebookBannerAd = FacebookBannerAd(
-  //       placementId: AdUnitId.standardBannerId,
-  //       bannerSize: BannerSize.STANDARD,
-  //       listener: (result, val) {
-  //         print(val);
-  //         print(result);
-  //       },
-  //     );
-  //   });
-  // }
-
-  // FacebookBannerAd? facebookBannerAd;
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +59,7 @@ class _GradientSilverAppBarState extends State<GradientSilverAppBar> {
                       // Container(
                       //   child: facebookBannerAd,
                       // )
-                      Container(
-                        child: BannerMaxView(
-                            (AppLovinAdListener? event) => print(event),
-                            BannerAdSize.banner,
-                            AdUnitId.applovinBannerId),
-                      )
+                      applovinBannerAd()
                     ])),
             Positioned(
               child: Container(
