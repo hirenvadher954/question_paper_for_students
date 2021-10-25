@@ -5,6 +5,7 @@ import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
+import 'package:gtu_question_paper/common_widgets/ads/applovin_banner_ads.dart';
 import 'package:gtu_question_paper/common_widgets/pdf_viewer_page.dart';
 import 'package:gtu_question_paper/constants/ad_unit_id.dart';
 
